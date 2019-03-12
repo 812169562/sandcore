@@ -1,0 +1,93 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netcoreapp2.0\Sand.xml</DocumentationFile>
+    <DefineConstants>TRACE;EFCORE FULL NETSTANDARD2_0</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Events\Internal\**" />
+    <EmbeddedResource Remove="Events\Internal\**" />
+    <None Remove="Events\Internal\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Cache\RedisHelper.cs" />
+    <Compile Remove="DI\Container.cs" />
+    <Compile Remove="Events\EventBusBase.cs" />
+    <Compile Remove="Events\EventBusPack.cs" />
+    <Compile Remove="Events\EventDataBase.cs" />
+    <Compile Remove="Events\EventHandlerBase.cs" />
+    <Compile Remove="Events\EventHandlerTypeFinder.cs" />
+    <Compile Remove="Events\IEventBusBuilder.cs" />
+    <Compile Remove="Events\IEventData.cs" />
+    <Compile Remove="Events\IEventHandlerFactory.cs" />
+    <Compile Remove="Events\IEventHandlerTypeFinder.cs" />
+    <Compile Remove="Extension\00-Extensions.DateTime.cs" />
+    <Compile Remove="Extension\EmitExtensions.cs" />
+    <Compile Remove="Log\LogResource.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Log\LogResource.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Domain\Services\" />
+    <Folder Include="Domain\Events\" />
+    <Folder Include="EntityFramework\EFCore\" />
+    <Folder Include="EntityFramework\EF\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspectCore.Core" Version="1.2.0" />
+    <PackageReference Include="AspectCore.Extensions.Autofac" Version="1.2.0" />
+    <PackageReference Include="AspectCore.Extensions.DependencyInjection" Version="1.2.0" />
+    <PackageReference Include="Autofac" Version="4.9.1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="Dapper" Version="1.60.1" />
+    <PackageReference Include="Dapper.Contrib" Version="1.60.1" />
+    <PackageReference Include="Enums.NET" Version="2.3.2" />
+    <PackageReference Include="Exceptionless.NLog" Version="4.3.2022" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.1.0" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
+    <PackageReference Include="NPinyinCore" Version="0.2.0" />
+    <PackageReference Include="PaySharp.Core" Version="1.0.6" />
+    <PackageReference Include="Pomelo.Data.MySql" Version="1.0.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql.Design" Version="1.1.2" />
+    <PackageReference Include="protobuf-net" Version="2.4.0" />
+    <PackageReference Include="RestSharp" Version="106.6.9" />
+    <PackageReference Include="StackExchange.Redis" Version="2.0.519" />
+    <PackageReference Include="StaticDotNet.EntityFrameworkCore.ModelConfiguration" Version="1.2.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="4.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
