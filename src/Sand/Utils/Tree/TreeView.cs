@@ -100,7 +100,7 @@ namespace Sand.Utils.Tree
         /// 全部选中的节点,只有第一个几点才存在此值
         /// </summary>
         [DataMember]
-        public string [] Selecteds { get; set; }
+        public string[] Selecteds { get; set; }
     }
 
     /// <summary>
@@ -155,7 +155,7 @@ namespace Sand.Utils.Tree
         /// 层数
         /// </summary>
         [DataMember(Name = "depth")]
-        public override int Level { get { if (TreeCode.IsEmpty() || TreeCode.Length == 0) return 0; return TreeCode.Length / 36; } }
+        public override int Level { get { if (TreeCode.IsEmpty() || TreeCode.Length == 0) return 1; return TreeCode.Length / 32 + 1; } }
         /// <summary>
         /// 状态
         /// </summary>
