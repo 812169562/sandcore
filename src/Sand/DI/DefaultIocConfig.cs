@@ -16,6 +16,11 @@ namespace Sand.DI
     public class DefaultIocConfig : IocConfig
     {
         /// <summary>
+        /// 逗号分隔，运行扫描的集合（无法自动扫描时增加）
+        /// </summary>
+        public static string CompileLibraryNames = "Sand";
+
+        /// <summary>
         /// 加载IOC
         /// </summary>
         /// <param name="builder"></param>
@@ -23,7 +28,7 @@ namespace Sand.DI
         {
             var assemblies = new List<Assembly>();
             var dependencyContext = DependencyContext.Default;
-            var libs = dependencyContext.CompileLibraries.Where(lib => !lib.Serviceable && lib.Type != "package");
+            var libs = dependencyContext.CompileLibraries.Where(lib => (!lib.Serviceable && lib.Type != "package")|| CompileLibraryNames.Contains(lib.Name));
             foreach (var lib in libs)
             {
                 var assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(lib.Name));

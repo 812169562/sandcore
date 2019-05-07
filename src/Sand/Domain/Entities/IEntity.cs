@@ -177,12 +177,14 @@ namespace Sand.Domain.Entities
         [Key]
         public TPrimaryKey Id { get; set; }
         /// <summary>
-        /// 住户编号
+        /// 租户编号
         /// </summary>
+        [NotMapped]
         public virtual string TenantId { get; set; }
         /// <summary>
         /// 门店号
         /// </summary>
+        [NotMapped]
         public virtual string StroeId { get; set; }
         /// <summary>
         /// 创建时间
