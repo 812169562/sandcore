@@ -113,7 +113,14 @@ namespace Sand.Domain.Uow
             try
             {
                 ConnectionString = _sqlConfig.SqlConnectionString;
-                optionsBuilder.UseMySql(ConnectionString);
+                if (_sqlConfig.DbType == DbType.Mysql)
+                {
+                    optionsBuilder.UseMySql(ConnectionString);
+                }
+                else if (_sqlConfig.DbType == DbType.Mssql)
+                {
+                    optionsBuilder.UseSqlServer(ConnectionString);
+                }
                 //var s = @"Data Source=DESKTOP-9G02PJO\MSSQLSERVER3;database=IdentityServer4.EntityFramework-2.0.0;user=sa;password=sa;";
                 //optionsBuilder.UseSqlServer(s);
                 optionsBuilder.EnableSensitiveDataLogging();
