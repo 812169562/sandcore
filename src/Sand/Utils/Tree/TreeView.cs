@@ -95,12 +95,12 @@ namespace Sand.Utils.Tree
         /// 是否选中
         /// </summary>
         [DataMember]
-        public bool Selected { get; set; }
+        public virtual bool Selected { get; set; }
         /// <summary>
         /// 全部选中的节点,只有第一个几点才存在此值
         /// </summary>
         [DataMember]
-        public string[] Selecteds { get; set; }
+        public virtual string[] Selecteds { get; set; }
     }
 
     /// <summary>
@@ -111,12 +111,11 @@ namespace Sand.Utils.Tree
         /// <summary>
         /// 节点编号
         /// </summary>
-        public override string Value { get; set; }
+        public override string Id { get; set; }
         /// <summary>
         /// 节点编号
         /// </summary>
-        [DataMember(Name = "id")]
-        public override string Id { get; set; }
+        public override string Value { get; set; }
         /// <summary>
         /// 节点标签
         /// </summary>
