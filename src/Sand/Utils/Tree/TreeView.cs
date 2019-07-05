@@ -48,7 +48,7 @@ namespace Sand.Utils.Tree
         [DataMember]
         public virtual bool IsLeaf
         {
-            get { return _isLeaf = !(Children == null || Children.Count() == 0); }
+            get { return _isLeaf = (Children == null || Children.Count() == 0); }
             set { _isLeaf = value; }
         }
         /// <summary>
@@ -137,7 +137,7 @@ namespace Sand.Utils.Tree
         [DataMember]
         public override bool IsLeaf
         {
-            get { return _isLeaf = !(Children == null || Children.Count() == 0); }
+            get { return _isLeaf = (Children == null || Children.Count() == 0); }
             set { _isLeaf = value; }
         }
         /// <summary>
