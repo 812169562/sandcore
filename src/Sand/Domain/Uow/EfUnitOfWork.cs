@@ -117,7 +117,7 @@ namespace Sand.Domain.Uow
                 {
                     optionsBuilder.UseSqlServer(ConnectionString);
                 }
-                else (_sqlConfig.DbType == DbType.Mysql)
+                else if (_sqlConfig.DbType == DbType.Mysql)
                 {
                     optionsBuilder.UseMySql(ConnectionString);
                 }
