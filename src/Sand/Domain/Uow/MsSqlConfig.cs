@@ -26,6 +26,6 @@ namespace Sand.Domain.Uow
         /// <summary>
         /// 
         /// </summary>
-        public DbType DbType { get => DbType.Mysql; }
+        public DbType DbType { get => DbType.Mssql; }
     }
 }
