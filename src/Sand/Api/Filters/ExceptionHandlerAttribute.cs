@@ -27,6 +27,7 @@ namespace Sand.Api.Filters
             {
                 var exception = context.Exception.InnerException as Warning;
                 message = exception.Messages;
+                Log.Log.GetLog("AopDebugLog").Debug(message);
             }
             else if (context.Exception.InnerException is Transform)
             {
