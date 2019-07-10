@@ -151,9 +151,8 @@ namespace Sand.Service
 
         public virtual TDto CreateOrUpdate(TDto dto)
         {
-
             TEntity result = null;
-            if (dto.Id.ToString().IsEmpty())
+            if (dto.Id==null||default(TPrimaryKey).Equals(dto.Id)||dto.Id.ToString().IsEmpty())
                 result = Repository.Create(ToEntity(dto));
             else
                 result = Repository.Update(ToEntity(dto));
@@ -167,7 +166,7 @@ namespace Sand.Service
         public virtual async Task<TDto> CreateOrUpdateAsync(TDto dto)
         {
             TEntity result = null;
-            if (dto.Id.ToString().IsEmpty())
+            if (dto.Id == null || default(TPrimaryKey).Equals(dto.Id) || dto.Id.ToString().IsEmpty())
                 result = await Repository.CreateAsync(ToEntity(dto));
             else
                 result = await Repository.UpdateAsync(ToEntity(dto));
