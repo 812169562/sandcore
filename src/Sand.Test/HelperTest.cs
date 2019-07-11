@@ -14,6 +14,16 @@ namespace Sand.Test
     public class HelperTest
     {
         [Fact]
+        public void TestIdCard()
+        {
+            "51018219881022007X".CheckIdCard();
+            "51018219881022007X".CheckIdCard(false);
+            "".CheckIdCard(false);
+            //"".CheckIdCard();
+            "1".CheckIdCard();
+        }
+
+        [Fact]
         public void EunmDescription()
         {
             var value = SystemStatus.Pause.Description();
