@@ -57,7 +57,6 @@ namespace Sand.Extensions
         /// 验证18位的身份证格式与合法性，并输出身份证信息(地区,出生年月日,性别)
         /// </summary>
         /// <param name="sCardId">身份证卡号</param>
-        /// <param name="cardMessage">合法身份证输出【地区、生日、性别】数组,反之输出错误信息</param>
         /// <returns></returns>
         private static bool CheckCid_18(string sCardId)
         {
