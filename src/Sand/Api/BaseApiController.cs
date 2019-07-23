@@ -53,7 +53,6 @@ namespace Sand.Api
                 message = "成功";
             if (title == null)
                 title = "";
-            throw new Transform("");
             return new ApiResult(StateCode.Ok, message, data, title);
         }
 
