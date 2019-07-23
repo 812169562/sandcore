@@ -27,7 +27,7 @@ namespace Sand.Api.Filters
             {
                 var exception = context.Exception.InnerException as Warning;
                 message = exception.Messages;
-                context.Result = new ApiResult(StateCode.Fail, message, exception.Code);
+                context.Result = new ApiResult(StateCode.Fail, message, null, exception.Code);
                 Log.Log.GetLog("AopDebugLog").Debug(message);
             }
             else if (context.Exception.InnerException is Transform)
@@ -35,7 +35,7 @@ namespace Sand.Api.Filters
                 var exception = context.Exception.InnerException as Transform;
                 message = exception.Messages;
                 var ex = context.Exception.InnerException as Transform;
-                context.Result = new ApiResult(StateCode.Transform, message, ex.Code, ex.Data);
+                context.Result = new ApiResult(StateCode.Transform, message, ex.Data, ex.Code);
             }
             else if (context.Exception.InnerException is Pomelo.Data.MySql.MySqlException)
             {

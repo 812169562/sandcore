@@ -15,7 +15,7 @@ namespace Sand.Api
     /// <summary>
     /// api基类
     /// </summary>
-    [ExceptionHandler]
+    //[ExceptionHandler]
     [TraceLog]
     public class BaseApiController : Controller
     {

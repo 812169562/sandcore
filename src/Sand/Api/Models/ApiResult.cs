@@ -45,10 +45,10 @@ namespace Sand.Api.Models
         /// </summary>
         /// <param name="code">状态码</param>
         /// <param name="message">消息</param>
-        /// <param name="errorCode">错误代码</param>
         /// <param name="data">数据</param>
+        /// <param name="errorCode">错误代码</param>
         /// <param name="title">标题</param>
-        public ApiResult(StateCode code, string message, string errorCode, dynamic data = null, string title = "") : base(null)
+        public ApiResult(StateCode code, string message, dynamic data = null, string errorCode = "", string title = "") : base(null)
         {
             _errorCode = errorCode;
             _code = code;
@@ -64,10 +64,10 @@ namespace Sand.Api.Models
         /// <param name="jsonSerializerSettings">序列化规则</param>
         /// <param name="code">状态码</param>
         /// <param name="message">消息</param>
-        /// <param name="errorCode">错误代码</param>
         /// <param name="data">数据</param>
+        /// <param name="errorCode">错误代码</param>
         /// <param name="title">标题</param>
-        public ApiResult(JsonSerializerSettings jsonSerializerSettings, StateCode code, string message, string errorCode, dynamic data = null, string title = "") : base(null)
+        public ApiResult(JsonSerializerSettings jsonSerializerSettings, StateCode code, string message,  dynamic data = null, string errorCode = "", string title = "") : base(null)
         {
             _code = code;
             _errorCode = errorCode;
