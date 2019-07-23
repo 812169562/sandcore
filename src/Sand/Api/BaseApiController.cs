@@ -8,6 +8,7 @@ using Sand.Utils.Enums;
 using Sand.Api.Models;
 using Sand.Api.Filters;
 using Sand.Filter;
+using Sand.Exceptions;
 
 namespace Sand.Api
 {
@@ -52,6 +53,7 @@ namespace Sand.Api
                 message = "成功";
             if (title == null)
                 title = "";
+            throw new Transform("");
             return new ApiResult(StateCode.Ok, message, data, title);
         }
 

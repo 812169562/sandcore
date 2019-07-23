@@ -16,6 +16,10 @@ namespace Sand.Api.Models
     public class ApiResult : JsonResult
     {
         /// <summary>
+        /// 错误代码
+        /// </summary>
+        public string _errorCode;
+        /// <summary>
         /// 状态码
         /// </summary>
         public readonly StateCode _code;
@@ -41,10 +45,12 @@ namespace Sand.Api.Models
         /// </summary>
         /// <param name="code">状态码</param>
         /// <param name="message">消息</param>
+        /// <param name="errorCode">错误代码</param>
         /// <param name="data">数据</param>
         /// <param name="title">标题</param>
-        public ApiResult(StateCode code, string message, dynamic data = null, string title = "") : base(null)
+        public ApiResult(StateCode code, string message, string errorCode, dynamic data = null, string title = "") : base(null)
         {
+            _errorCode = errorCode;
             _code = code;
             _message = message;
             _data = data;
@@ -58,11 +64,13 @@ namespace Sand.Api.Models
         /// <param name="jsonSerializerSettings">序列化规则</param>
         /// <param name="code">状态码</param>
         /// <param name="message">消息</param>
+        /// <param name="errorCode">错误代码</param>
         /// <param name="data">数据</param>
         /// <param name="title">标题</param>
-        public ApiResult(JsonSerializerSettings jsonSerializerSettings, StateCode code, string message, dynamic data = null, string title = "") : base(null)
+        public ApiResult(JsonSerializerSettings jsonSerializerSettings, StateCode code, string message, string errorCode, dynamic data = null, string title = "") : base(null)
         {
             _code = code;
+            _errorCode = errorCode;
             _message = message;
             _data = data;
             _title = title;
@@ -83,6 +91,7 @@ namespace Sand.Api.Models
         {
             this.Value = new
             {
+                ErrorCode=_errorCode,
                 Code = _code.Value(),
                 Message = _message,
                 Data = _data,

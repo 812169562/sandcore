@@ -22,7 +22,7 @@ namespace Sand.Extensions
         /// <param name="separator">分隔符，默认使用逗号分隔</param>
         public static string Join<T>(this IEnumerable<T> list, string quotes = "", string separator = ",")
         {
-            return Sand.Helpers .String.Join(list, quotes, separator);
+            return Helpers .String.Join(list, quotes, separator);
         }
     }
 }
