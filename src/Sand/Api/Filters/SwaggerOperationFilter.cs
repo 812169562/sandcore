@@ -73,7 +73,7 @@ namespace Sand.Api.Filters
         /// </summary>
         /// <param name="operation"></param>
         /// <param name="context"></param>
-        public void Apply(Operation operation, OperationFilterContext context)
+        public new void Apply(Operation operation, OperationFilterContext context)
         {
             // Policy names map to scopes
             var requiredScopes = context.MethodInfo.ReflectedType
