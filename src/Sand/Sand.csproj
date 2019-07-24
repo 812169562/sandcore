@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <LangVersion>7.1</LangVersion>
-    <Version>1.1.6</Version>
+    <Version>1.1.8</Version>
     <Authors>yy</Authors>
     <Product>yy</Product>
     <Description>使用框架，包含了基本的操作，最基本的东西，更新树形数据获取BUG</Description>
