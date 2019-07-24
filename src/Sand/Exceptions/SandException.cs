@@ -94,7 +94,7 @@ namespace Sand.Exceptions
         /// </summary>
         public Transform()
         {
-            Code = "W";
+            Code = "T";
         }
         /// <summary>
         /// 警告，页面做跳转或者其他方法

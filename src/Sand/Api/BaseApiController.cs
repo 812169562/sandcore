@@ -8,13 +8,14 @@ using Sand.Utils.Enums;
 using Sand.Api.Models;
 using Sand.Api.Filters;
 using Sand.Filter;
+using Sand.Exceptions;
 
 namespace Sand.Api
 {
     /// <summary>
     /// api基类
     /// </summary>
-    [ExceptionHandler]
+    //[ExceptionHandler]
     [TraceLog]
     public class BaseApiController : Controller
     {
