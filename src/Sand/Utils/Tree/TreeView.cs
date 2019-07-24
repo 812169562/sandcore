@@ -212,5 +212,15 @@ namespace Sand.Utils.Tree
         /// </summary>
         [DataMember]
         public string Para { get; set; }
+        /// <summary>
+        /// 节点编号
+        /// </summary>
+        [DataMember]
+        public string Key { get => Value; }
+        /// <summary>
+        /// 节点标签
+        /// </summary>
+        [DataMember]
+        public string Title { get => Label; }
     }
 }
