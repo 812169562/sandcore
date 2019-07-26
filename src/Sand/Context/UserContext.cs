@@ -12,6 +12,11 @@ using Sand.Helpers;
 namespace Sand.Context
 {
     /// <summary>
+    /// 
+    /// </summary>
+    public interface IThird { }
+
+    /// <summary>
     /// 用户信息
     /// </summary>
     public interface IUserContext : IDependency
@@ -40,6 +45,10 @@ namespace Sand.Context
         /// 微信识别号
         /// </summary>
         string WxOpenId { get; set; }
+        /// <summary>
+        /// 微信识别号
+        /// </summary>
+        IThird ThirdData { get; set; }
         /// <summary>
         /// 系统用户角色类型
         /// </summary>
@@ -83,6 +92,10 @@ namespace Sand.Context
         /// 系统用户角色类型
         /// </summary>
         public SystemUserType Type { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public IThird ThirdData { get; set; }
 
         /// <summary>
         /// 
@@ -144,6 +157,10 @@ namespace Sand.Context
         /// 系统用户角色类型
         /// </summary>
         public SystemUserType Type { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public IThird ThirdData { get; set; }
 
         /// <summary>
         /// 设置测试数据
