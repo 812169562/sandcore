@@ -1,5 +1,5 @@
 ﻿using Sand.Exceptions;
-using Sand.Extension;
+using Sand.Extensions;
 using Sand.Log.Abstractions;
 using Sand.Log.Core;
 using System;

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sand.Extension
+namespace Sand.Extensions
 {
     /// <summary>
     /// sql扩展
