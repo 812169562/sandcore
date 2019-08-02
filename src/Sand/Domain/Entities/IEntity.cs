@@ -155,7 +155,7 @@ namespace Sand.Domain.Entities
             this.StroeId = this.CreateId ?? userContext.StroeId;
             this.TenantId = this.TenantId??this.CreateId ?? userContext.TenantId;
             this.IsEnable = true;
-            this.Status = 1;
+            //this.Status = 1;
             this.SetUpdateUser(userContext);
         }
         /// <summary>

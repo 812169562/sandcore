@@ -200,13 +200,11 @@ namespace Sand.Utils.Tree
         /// </summary>
         [DataMember]
         public string Url { get; set; }
-
         /// <summary>
         /// 路径
         /// </summary>
         [DataMember]
         public string Path { get; set; }
-
         /// <summary>
         /// 参数
         /// </summary>
