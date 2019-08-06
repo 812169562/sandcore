@@ -38,9 +38,16 @@ namespace Sand.Api
         /// </summary>
         public BaseApiController()
         {
-            UserContext = DefaultIocConfig.Container.Resolve<IUserContext>();
+            LoadUserContext();
         }
 
+        /// <summary>
+        /// 加载用户上下文
+        /// </summary>
+        public virtual void LoadUserContext()
+        {
+            UserContext = DefaultIocConfig.Container.Resolve<IUserContext>();
+        }
         /// <summary>
         /// 返回成功消息
         /// </summary>
