@@ -47,5 +47,19 @@ namespace Sand.Log.Extensions
             services.AddScoped<ILog, Log>();
             configAction?.Invoke( ExceptionlessClient.Default.Configuration );
         }
+
+        /// <summary>
+        /// 注册Exceptionless日志操作
+        /// </summary>
+        /// <param name="services">服务集合</param>
+        /// <param name="configAction">配置操作</param>
+        public static void AddExceptionless(this ContainerBuilder services, Action<ExceptionlessConfiguration> configAction)
+        {
+            services.RegisterType<ExceptionlessProviderFactory>().As<ILogProviderFactory>().AsImplementedInterfaces().InstancePerLifetimeScope();
+            services.RegisterType<NullLogFormat>().As<ILogFormat>().SingleInstance();
+            services.RegisterType<ExceptionlessLogContext>().As<ILogContext>().AsImplementedInterfaces().InstancePerLifetimeScope(); ;
+            services.RegisterType<Log>().As<ILog>().AsImplementedInterfaces().InstancePerLifetimeScope(); ;
+            configAction?.Invoke(ExceptionlessClient.Default.Configuration);
+        }
     }
 }

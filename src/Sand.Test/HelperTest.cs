@@ -9,13 +9,44 @@ using Xunit;
 using Sand.Utils.Enums;
 using System.Runtime.Serialization;
 using Sand.Utils.Tree;
+using Sand.Log.Less;
+using Sand.Exceptions;
+using Exceptionless.Configuration;
+using Exceptionless;
+
+[assembly: Exceptionless("3TU9S2rEdg6pqPeppqeigjVgxkylxElb2Eic2kuh", ServerUrl = "http://210.41.221.239:9000")]
 namespace Sand.Test
 {
     public class HelperTest
     {
         [Fact]
+        public void TestExceptionlessLog()
+        {
+            try
+            {
+                Exceptionless.ExceptionlessClient.Default.Configuration.ServerUrl = "http://210.41.221.239:9000";
+                //Exceptionless.ExceptionlessClient.Default.Configuration.ApiKey = "3TU9S2rEdg6pqPeppqeigjVgxkylxElb2Eic2kuh";
+                Exceptionless.ExceptionlessClient.Default.Startup("3TU9S2rEdg6pqPeppqeigjVgxkylxElb2Eic2kuh");
+                var data3 = new ExceptionlessLog()
+                { Message = "__测试一下对不对", Property = "__test", PropertyName = "__test1", Tag = "__test2", UserId = "__003" };
+                var data = new List<ExceptionlessLog>();
+                data.Add(data3);
+                var data2 = new ExceptionlessLog()
+                { Message = "测试一下对不对", Property = "test", PropertyName = "test1", Tag = "test2", UserId = "003", Data = data };
+                Exceptionless.ExceptionlessClient.Default.Log(data2);
+                throw new Warning("测试异常日志记录");
+            }
+            catch (Exception ex)
+            {
+                ex.Submit();
+                ex.Submit("test2");
+            }
+        }
+
+        [Fact]
         public void TestIdCard()
         {
+            
             "51018219881022007X".CheckIdCard();
             "51018219881022007X".CheckIdCard(false);
             "".CheckIdCard(false);

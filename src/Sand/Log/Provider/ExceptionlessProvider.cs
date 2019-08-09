@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using Sand.Log.Abstractions;
 using Exceptionless;
 using System.Linq;
+using Sand.Log.Core;
 
 namespace Sand.Log.Provider
 {
@@ -60,10 +61,10 @@ namespace Sand.Log.Provider
         {
             InitLine();
             var builder = CreateBuilder(level, content);
-            SetUser(content);
-            SetSource(builder, content);
-            SetReferenceId(builder, content);
-            AddProperties(builder, content as ILogConvert);
+            builder.SetUserIdentity(content.UserId);
+            builder.SetSource(content.Url);
+            builder.SetReferenceId(content.TraceId);
+            AddProperties(builder, content as ExceptionlessContent);
             builder.Submit();
         }
 

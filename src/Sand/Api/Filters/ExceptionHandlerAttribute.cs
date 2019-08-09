@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Sand.Log.Less;
 
 namespace Sand.Api.Filters
 {
@@ -28,7 +29,7 @@ namespace Sand.Api.Filters
                 var exception = context.Exception.InnerException as Warning;
                 message = exception.Messages;
                 context.Result = new ApiResult(StateCode.Fail, message, null, exception.Code);
-                Log.Log.GetLog("AopDebugLog").Debug(message);
+                //Log.Log.GetLog("AopDebugLog").Debug(message);
             }
             else if (context.Exception.InnerException is Transform)
             {
@@ -49,6 +50,7 @@ namespace Sand.Api.Filters
                 Log.Log.GetLog("SystemErrorTraceLog").Error(message);
                 context.Result = new ApiResult(StateCode.Fail, message, "");
             }
+            context.Exception.Submit();
         }
     }
 }

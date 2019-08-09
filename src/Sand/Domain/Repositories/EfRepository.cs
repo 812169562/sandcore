@@ -361,7 +361,7 @@ namespace Sand.Domain.Repositories
         /// <returns></returns>
         public override IList<TEntity> RetrieveAll()
         {
-            throw new NotImplementedException();
+           return Table.Where(t => true).ToList();
         }
     }
     /// <summary>

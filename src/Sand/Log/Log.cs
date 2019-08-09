@@ -49,6 +49,10 @@ namespace Sand.Log
         /// </summary>
         protected override LogContent GetContent()
         {
+            if (Context!=null&&Context.GetType().FullName.Contains("ExceptionlessLogContext"))
+            {
+                return new ExceptionlessContent { Class = _class };
+            }
             return new LogContent { Class = _class };
         }
 

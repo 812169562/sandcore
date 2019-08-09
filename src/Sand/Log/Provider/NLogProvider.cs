@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using NLogs = NLog;
 using Sand.Log.Abstractions;
 using Sand.Log.Core;
+using Sand.Log.Less;
 
 namespace Sand.Log.Provider
 {

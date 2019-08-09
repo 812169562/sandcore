@@ -102,6 +102,26 @@ namespace Sand.Log.Extensions
         }
 
         /// <summary>
+        /// 设置开始时间
+        /// </summary>
+        /// <param name="log">日志操作</param>
+        /// <param name="value">参数值</param>
+        public static ILog OperationTime(this ILog log, string value)
+        {
+            return log.Set<LogContent>(content => content.Content(content.OperationTime, value));
+        }
+
+        /// <summary>
+        /// 设置执行时间
+        /// </summary>
+        /// <param name="log">日志操作</param>
+        /// <param name="value">参数值</param>
+        public static ILog Duration(this ILog log, string value)
+        {
+            return log.Set<LogContent>(content => content.Content(content.Duration, value));
+        }
+
+        /// <summary>
         /// 设置参数
         /// </summary>
         /// <param name="log">日志操作</param>
