@@ -31,6 +31,7 @@ namespace Sand.Log.Less
         /// <param name="log">日志内容</param>
         public static void Log(this ExceptionlessClient client, ExceptionlessLog log)
         {
+            var uuid = Uuid.Next();
             var eventBuilder = client.CreateLog(log.Message).AddTags(log.Tag);
             if (log.Data != null)
             {
@@ -39,8 +40,10 @@ namespace Sand.Log.Less
                     eventBuilder.AddObject(item);
                 }
             }
+            eventBuilder.SetReferenceId(uuid);
+            eventBuilder.SetSource(uuid);
             eventBuilder.SetProperty(log.PropertyName, log.Property);
-            eventBuilder.SetVersion(Uuid.Next());
+            eventBuilder.SetVersion(uuid);
             eventBuilder.SetUserIdentity(log.UserId);
             eventBuilder.Submit();
         }

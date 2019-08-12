@@ -6,6 +6,7 @@ using Sand.Log.Abstractions;
 using Exceptionless;
 using System.Linq;
 using Sand.Log.Core;
+using Sand.Helpers;
 
 namespace Sand.Log.Provider
 {
@@ -63,7 +64,7 @@ namespace Sand.Log.Provider
             var builder = CreateBuilder(level, content);
             builder.SetUserIdentity(content.UserId);
             builder.SetSource(content.Url);
-            builder.SetReferenceId(content.TraceId);
+            builder.SetReferenceId(Uuid.Next());
             AddProperties(builder, content as ExceptionlessContent);
             builder.Submit();
         }

@@ -386,7 +386,7 @@ namespace Sand.Data
             }
             //_log.Content("请求:" + "浏览器：" + Web.Browser + "  请求地址：" + Web.Url)
             _log.Sql("原始Sql:")
-           //.Caption("执行sql:")
+           .Caption("执行sql:")
            .Sql($"{sql}{Environment.NewLine}")
            .Sql("调试Sql")
            .Sql(debugSql)
@@ -412,7 +412,7 @@ namespace Sand.Data
                 debugCountSql = debugCountSql.Replace("?" + parameter.Key, SqlHelper.GetParamLiterals(parameter.Value));
             }
             _log.Sql("总条数原始Sql:")
-           //.Caption("执行分页sql:")
+           .Caption("执行分页sql:")
            .Sql($"{sql}{Environment.NewLine}")
            .Sql("总条数调试Sql")
            .Sql(debugCountSql)
@@ -733,7 +733,6 @@ namespace Sand.Data
             this.Open();
             WriteTraceLog(sql, param);
             var query = DbConnection.Query<TResult>(sql, param).ToList();
-            _log.Content("sql查询结束");
             return query;
         }
         /// <summary>
@@ -933,7 +932,7 @@ namespace Sand.Data
             }
             //_log.Content("请求:" + "浏览器：" + Web.Browser + "  请求地址：" + Web.Url)
             _log.Sql("原始Sql:")
-           //.Caption("执行sql:")
+           .Caption("执行sql:")
            .Sql($"{sql}{Environment.NewLine}")
            .Sql("调试Sql")
            .Sql(debugSql)
@@ -960,7 +959,7 @@ namespace Sand.Data
                 debugCountSql = debugCountSql.Replace("@" + parameter.Key, SqlHelper.GetParamLiterals(parameter.Value));
             }
             _log.Sql("总条数原始Sql:")
-           //.Caption("执行分页sql:")
+           .Caption("执行分页sql:")
            .Sql($"{sql}{Environment.NewLine}")
            .Sql("总条数调试Sql")
            .Sql(debugCountSql)
