@@ -3,6 +3,7 @@ using AutoMapper;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
+using AutoMapper.Configuration;
 
 namespace Sand.Maps
 {
@@ -44,9 +45,9 @@ namespace Sand.Maps
         private static TDestination MapTo<TDestination>(object source, TDestination destination)
         {
             if (source == null)
-                throw new ArgumentNullException(nameof(source));
+                return default(TDestination);
             if (destination == null)
-                throw new ArgumentNullException(nameof(destination));
+                return default(TDestination);
             var sourceType = GetType(source);
             var destinationType = GetType(destination);
             var map = GetMap(sourceType, destinationType);
@@ -57,13 +58,7 @@ namespace Sand.Maps
                 map = GetMap(sourceType, destinationType);
                 if (map != null)
                     return Mapper.Map(source, destination);
-                var maps = Mapper.Configuration.GetAllTypeMaps();
-                Mapper.Initialize(config => {
-                    ClearConfig();
-                    foreach (var item in maps)
-                        config.CreateMap(item.SourceType, item.DestinationType);
-                    config.CreateMap(sourceType, destinationType);
-                });
+                InitMaps(sourceType, destinationType);
             }
             return Mapper.Map(source, destination);
         }
@@ -103,9 +98,7 @@ namespace Sand.Maps
                     }
                     catch (InvalidOperationException)
                     {
-                        Mapper.Initialize(config => {
-                            config.CreateMap(sourceType, destinationType);
-                        });
+                        InitMaps(sourceType, destinationType);
                     }
                     return Mapper.Configuration.FindTypeMapFor(sourceType, destinationType);
                 }
@@ -113,13 +106,32 @@ namespace Sand.Maps
         }
 
         /// <summary>
-        /// 清空配置
+        /// 初始化映射配置
         /// </summary>
-        private static void ClearConfig()
+        private static void InitMaps(Type sourceType, Type destinationType)
         {
-            var typeMapper = typeof(Mapper).GetTypeInfo();
-            var configuration = typeMapper.GetDeclaredField("_configuration");
-            configuration.SetValue(null, null, BindingFlags.Static, null, CultureInfo.CurrentCulture);
+            try
+            {
+                var maps = Mapper.Configuration.GetAllTypeMaps();
+                Mapper.Reset();
+                InitMapper(sourceType, destinationType);
+                foreach (var map in maps)
+                    Mapper.Configuration.RegisterTypeMap(map);
+            }
+            catch (InvalidOperationException)
+            {
+                InitMapper(sourceType, destinationType);
+            }
+        }
+
+        /// <summary>
+        /// 初始化映射器
+        /// </summary>
+        private static void InitMapper(Type sourceType, Type destinationType)
+        {
+            var config = new MapperConfigurationExpression();
+            config.CreateMap(sourceType, destinationType);
+            Mapper.Initialize(config);
         }
 
         /// <summary>
@@ -132,59 +144,4 @@ namespace Sand.Maps
             return MapTo<List<TDestination>>(source);
         }
     }
-
-    ///// <summary>
-    ///// 将源对象映射到目标对象
-    ///// </summary>
-    ///// <typeparam name="TSource">源类型</typeparam>
-    ///// <typeparam name="TDestination">目标类型</typeparam>
-    ///// <param name="source">源对象</param>
-    ///// <param name="destination">目标对象</param>
-    //public static TDestination MapTo<TSource, TDestination>(this TSource source, TDestination destination)
-    //{
-    //    return MapTo<TDestination>(source, destination);
-    //}
-
-    ///// <summary>
-    ///// 将源对象映射到目标对象
-    ///// </summary>
-    ///// <typeparam name="TDestination">目标类型</typeparam>
-    ///// <param name="source">源对象</param>
-    //public static TDestination MapTo<TDestination>(this object source) where TDestination : new()
-    //{
-    //    return MapTo(source, new TDestination());
-    //}
-
-    ///// <summary>
-    ///// 将源对象映射到目标对象
-    ///// </summary>
-    //private static TDestination MapTo<TDestination>(object source, TDestination destination)
-    //{
-    //    if (source == null)
-    //        throw new ArgumentNullException(nameof(source));
-    //    if (destination == null)
-    //        throw new ArgumentNullException(nameof(destination));
-    //    var sourceType = source.GetType();
-    //    var destinationType = typeof(TDestination);
-    //    try
-    //    {
-    //        var map = Mapper.Configuration.FindTypeMapFor(sourceType, destinationType);
-    //        //map = map?? Mapper.Configuration.FindTypeMapFor(destinationType, sourceType);
-    //        if (map != null)
-    //            return Mapper.Map(source, destination);
-    //        var maps = Mapper.Configuration.GetAllTypeMaps();
-    //        Mapper.Initialize(config => {
-    //            foreach (var item in maps)
-    //                config.CreateMap(item.SourceType, item.DestinationType);
-    //            config.CreateMap(sourceType, destinationType);
-    //        });
-    //    }
-    //    catch (InvalidOperationException)
-    //    {
-    //        Mapper.Initialize(config => {
-    //            config.CreateMap(sourceType, destinationType);
-    //        });
-    //    }
-    //    return Mapper.Map(source, destination);
-    //}
 }
