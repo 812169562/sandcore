@@ -30,8 +30,12 @@ namespace Sand.Log.Less
         /// </summary>
         public string PropertyName { get; set; }
         /// <summary>
-        /// 日志数据
+        /// 传入数据
         /// </summary>
-        public dynamic Data { get; set; }
+        public object InputData { get; set; }
+        /// <summary>
+        /// 转出数据
+        /// </summary>
+        public object OutputData { get; set; }
     }
 }

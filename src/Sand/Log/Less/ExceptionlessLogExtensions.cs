@@ -33,13 +33,8 @@ namespace Sand.Log.Less
         {
             var uuid = Uuid.Next();
             var eventBuilder = client.CreateLog(log.Message).AddTags(log.Tag);
-            if (log.Data != null)
-            {
-                foreach (var item in log.Data)
-                {
-                    eventBuilder.AddObject(item);
-                }
-            }
+            eventBuilder.AddObject(log.InputData);
+            eventBuilder.AddObject(log.OutputData);
             eventBuilder.SetReferenceId(uuid);
             eventBuilder.SetSource(uuid);
             eventBuilder.SetProperty(log.PropertyName, log.Property);
