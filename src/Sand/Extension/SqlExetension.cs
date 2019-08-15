@@ -53,7 +53,7 @@ namespace Sand.Extensions
         /// <returns></returns>
         public static string AddTenant(this string before, string fliter)
         {
-            var user = DefaultIocConfig.Container.Resolve<IUserContext>();
+            var user = Ioc.GetService<IUserContext>();
             if (user.Type == SystemUserType.SuperAdmin)
             {
                 return before;
@@ -69,7 +69,7 @@ namespace Sand.Extensions
         /// <returns></returns>
         public static string AddStroe(this string before, string fliter)
         {
-            var user = DefaultIocConfig.Container.Resolve<IUserContext>();
+            var user = Ioc.GetService<IUserContext>();
             if (user.Type == SystemUserType.SuperAdmin || user.Type == SystemUserType.StroeAdmin)
             {
                 return before;

@@ -19,7 +19,7 @@ namespace Sand.Context
     /// <summary>
     /// 用户信息
     /// </summary>
-    public interface IUserContext : IDependency
+    public interface IUserContext
     {
         /// <summary>
         /// 登录编号

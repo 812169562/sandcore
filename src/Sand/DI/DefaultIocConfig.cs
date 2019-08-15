@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyModel;
 using Sand.Dependency;
 using System;
@@ -28,7 +29,7 @@ namespace Sand.DI
         {
             var assemblies = new List<Assembly>();
             var dependencyContext = DependencyContext.Default;
-            var libs = dependencyContext.CompileLibraries.Where(lib => (!lib.Serviceable && lib.Type != "package")|| CompileLibraryNames.Contains(lib.Name));
+            var libs = dependencyContext.CompileLibraries.Where(lib => (!lib.Serviceable && lib.Type != "package") || CompileLibraryNames.Contains(lib.Name));
             foreach (var lib in libs)
             {
                 var assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(lib.Name));
@@ -71,9 +72,12 @@ namespace Sand.DI
         /// </summary>
         /// <typeparam name="TService"></typeparam>
         /// <returns></returns>
-        public static TService GetService<TService>()
+        public static TService GetService<TService>() where TService : class
         {
-            return DefaultIocConfig.Container.Resolve<TService>();
+            var http = DefaultIocConfig.Container.Resolve<IHttpContextAccessor>();
+            if (http.HttpContext == null)
+                throw new ArgumentNullException();
+            return http.HttpContext.RequestServices.GetService(typeof(TService)) as TService;
         }
     }
 }

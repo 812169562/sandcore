@@ -45,7 +45,7 @@ namespace Sand.Api
         /// </summary>
         protected virtual void LoadUserContext()
         {
-            UserContext = DefaultIocConfig.Container.Resolve<IUserContext>();
+            UserContext = Ioc.GetService<IUserContext>();
         }
         /// <summary>
         /// 返回成功消息

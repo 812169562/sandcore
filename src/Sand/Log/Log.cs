@@ -116,7 +116,7 @@ namespace Sand.Log
         {
             try
             {
-                return DefaultIocConfig.Container.Resolve<ILogProviderFactory>();
+                return Ioc.GetService<ILogProviderFactory>();
             }
             catch
             {
@@ -131,7 +131,7 @@ namespace Sand.Log
         {
             try
             {
-                return DefaultIocConfig.Container.Resolve<ILogFormat>();
+                return Ioc.GetService<ILogFormat>();
             }
             catch
             {
@@ -146,7 +146,7 @@ namespace Sand.Log
         {
             try
             {
-                return DefaultIocConfig.Container.Resolve<ILogContext>();
+                return Ioc.GetService<ILogContext>();
             }
             catch
             {
@@ -161,7 +161,7 @@ namespace Sand.Log
         {
             try
             {
-                return DefaultIocConfig.Container.Resolve<IUserContext>();
+                return Ioc.GetService<IUserContext>();
             }
             catch
             {

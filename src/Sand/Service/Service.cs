@@ -65,7 +65,7 @@ namespace Sand.Service
         {
             Uow = uow;
             Repository = repository;
-            UserContext = DefaultIocConfig.Container.Resolve<IUserContext>();
+            UserContext = Ioc.GetService<IUserContext>();
         }
 
         /// <summary>

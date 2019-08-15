@@ -30,7 +30,7 @@ namespace Sand.Domain.Repositories
         protected BaseRepository(IUnitOfWork unitOfWork)
         {
             Uow = unitOfWork;
-            UserContext = DefaultIocConfig.Container.Resolve<IUserContext>();
+            UserContext = Ioc.GetService<IUserContext>();
         }
 
         /// <summary>
