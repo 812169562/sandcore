@@ -29,7 +29,6 @@ namespace Sand.Api.Filters
                 var exception = context.Exception.InnerException as Warning;
                 message = exception.Messages;
                 context.Result = new ApiResult(StateCode.Fail, message, null, exception.Code);
-                //Log.Log.GetLog("AopDebugLog").Debug(message);
             }
             else if (context.Exception.InnerException is Transform)
             {
@@ -43,12 +42,13 @@ namespace Sand.Api.Filters
                 message = context.Exception.GetMessage();
                 Log.Log.GetLog("Sql错误").Error(message);
                 message = "Pomelo错误";
+                context.Result = new ApiResult(StateCode.Fail, "操作超时", "");
             }
             else
             {
                 message = context.Exception.GetMessage();
                 Log.Log.GetLog("SystemErrorTraceLog").Error(message);
-                context.Result = new ApiResult(StateCode.Fail, message, "");
+                context.Result = new ApiResult(StateCode.Fail, "操作超时", "");
             }
             context.Exception.Submit();
         }

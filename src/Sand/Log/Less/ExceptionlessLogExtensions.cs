@@ -18,7 +18,7 @@ namespace Sand.Log.Less
         /// </summary>
         /// <param name="exception">异常</param>
         /// <param name="tag">tag</param>
-        public static void Submit(this Exception exception, string tag = null)
+        public static void Submit(this Exception exception,string tag = null)
         {
             if (exception == null)
                 return;
