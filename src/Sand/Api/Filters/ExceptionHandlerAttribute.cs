@@ -24,33 +24,56 @@ namespace Sand.Api.Filters
             context.ExceptionHandled = true;
             context.HttpContext.Response.StatusCode = 200;
             var message = "";
-            if (context.Exception is Warning)
+            var exception = context.Exception.GetOriginalException();
+            if (exception is Warning)
             {
-                var exception = context.Exception as Warning;
-                message = exception.Messages;
-                context.Result = new ApiResult(StateCode.Fail, message, null, exception.Code);
+                var ex = exception as Warning;
+                message = ex.Messages;
+                context.Result = new ApiResult(StateCode.Fail, message, null, ((Warning)exception).Code);
             }
-            else if (context.Exception is Transform)
+            else if (context.Exception.GetOriginalException() is Transform)
             {
-                var exception = context.Exception as Transform;
-                message = exception.Messages;
-                var ex = context.Exception as Transform;
+                var ex = exception as Transform;
+                message = ex.Messages;
                 context.Result = new ApiResult(StateCode.Transform, message, ex.Data, ex.Code);
             }
-            else if (context.Exception.InnerException is Pomelo.Data.MySql.MySqlException)
+            else if (context.Exception.GetOriginalException() is Pomelo.Data.MySql.MySqlException)
             {
-                message = context.Exception.GetMessage();
-                Log.Log.GetLog("Sql错误").Error(message);
-                message = "Pomelo错误";
+                var ex = exception as Pomelo.Data.MySql.MySqlException;
+                message = ex.GetMessage();
+                Log.Log.GetLog("Pomelo错误").Error(message);
                 context.Result = new ApiResult(StateCode.Fail, "操作超时", "");
             }
             else
             {
                 message = context.Exception.GetMessage();
                 Log.Log.GetLog("SystemErrorTraceLog").Error(message);
-                context.Result = new ApiResult(StateCode.Fail, "操作超时", "");
+                context.Result = new ApiResult(StateCode.Fail, "请求失败", "");
             }
             context.Exception.Submit();
+        }
+    }
+
+    /// <summary>
+    /// 获取最底层的异常类型
+    /// </summary>
+    public static class ExceptionExtensions
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <returns></returns>
+        public static Exception GetOriginalException(this Exception ex)
+        {
+            if (ex is Warning)
+                return ex;
+            if (ex is Transform)
+                return ex;
+            if (ex is Pomelo.Data.MySql.MySqlException)
+                return ex;
+            if (ex.InnerException == null) return ex;
+            return ex.InnerException.GetOriginalException();
         }
     }
 }
