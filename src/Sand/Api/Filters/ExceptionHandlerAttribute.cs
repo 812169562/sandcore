@@ -24,17 +24,17 @@ namespace Sand.Api.Filters
             context.ExceptionHandled = true;
             context.HttpContext.Response.StatusCode = 200;
             var message = "";
-            if (context.Exception.InnerException is Warning)
+            if (context.Exception is Warning)
             {
-                var exception = context.Exception.InnerException as Warning;
+                var exception = context.Exception as Warning;
                 message = exception.Messages;
                 context.Result = new ApiResult(StateCode.Fail, message, null, exception.Code);
             }
-            else if (context.Exception.InnerException is Transform)
+            else if (context.Exception is Transform)
             {
-                var exception = context.Exception.InnerException as Transform;
+                var exception = context.Exception as Transform;
                 message = exception.Messages;
-                var ex = context.Exception.InnerException as Transform;
+                var ex = context.Exception as Transform;
                 context.Result = new ApiResult(StateCode.Transform, message, ex.Data, ex.Code);
             }
             else if (context.Exception.InnerException is Pomelo.Data.MySql.MySqlException)
