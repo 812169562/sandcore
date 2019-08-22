@@ -3,18 +3,18 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <LangVersion>7.1</LangVersion>
-    <Version>1.1.30</Version>
+    <Version>1.1.31</Version>
     <Authors>yy</Authors>
     <Product>yy</Product>
-    <Description>使用框架，包含了基本的操作，最基本的东西，支付exceptionless和nlog切换</Description>
+    <Description>新增对mongodb支持，优化异常处理机制，升级automapper 到9.0</Description>
     <Copyright>MIT</Copyright>
     <PackageLicenseUrl>https://github.com/812169562/sandcore/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/812169562/sandcore.git</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/812169562/sandcore.git</RepositoryUrl>
     <RepositoryType>C#</RepositoryType>
-    <AssemblyVersion>1.1.30.0</AssemblyVersion>
-    <FileVersion>1.1.30.0</FileVersion>
+    <AssemblyVersion>1.1.31.0</AssemblyVersion>
+    <FileVersion>1.1.31.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

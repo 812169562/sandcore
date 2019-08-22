@@ -18,7 +18,7 @@ namespace Sand.Mongo
     /// <summary>
     /// Mongo仓储
     /// </summary>
-    public class MongoRepository<T> : IMongoRepository<T> where T : MongoEntity
+    public class MongoService<T> : IMongoSerivce<T> where T : MongoEntity
     {
         #region MongoSpecific
         private IMongoCollection<T> _collection;
@@ -93,7 +93,7 @@ namespace Sand.Mongo
         /// <summary>
         /// 
         /// </summary>
-        public MongoRepository() : this(Ioc.GetService<IConfiguration>())
+        public MongoService() : this(Ioc.GetService<IConfiguration>())
         {
         }
 
@@ -101,7 +101,7 @@ namespace Sand.Mongo
         /// where you need to define a connectionString with the name of repository
         /// </summary>
         /// <param name="config">config interface to read default settings</param>
-        public MongoRepository(IConfiguration config)
+        public MongoService(IConfiguration config)
         {
             _config = config;
         }
