@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Sand.Dependency;
 using Sand.Domain.Entities;
 using Sand.Filter;
@@ -32,6 +33,11 @@ namespace Sand.Domain.Repositories
     /// <typeparam name="TPrimaryKey">主键</typeparam>
     public interface IRepository<TEntity, TPrimaryKey> : IRepository where TEntity : class, IEntity<TPrimaryKey>
     {
+        /// <summary>
+        /// 实体集
+        /// </summary>
+        DbSet<TEntity> Table { get; }
+
         #region Create
 
         /// <summary>
