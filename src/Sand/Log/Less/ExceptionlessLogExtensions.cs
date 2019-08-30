@@ -22,7 +22,7 @@ namespace Sand.Log.Less
         {
             if (exception == null)
                 return;
-            exception.ToExceptionless().AddTags(tag ?? exception.GetType().Name).Submit();
+            exception.ToExceptionless().AddTags(tag ?? exception.GetType().ToString()).Submit();
         }
         /// <summary>
         /// 记录日志

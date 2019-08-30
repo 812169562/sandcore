@@ -40,10 +40,11 @@ namespace Sand.Api
         {
             LoadUserContext();
         }
+
         /// <summary>
         /// 加载用户上下文
         /// </summary>
-        protected virtual void LoadUserContext()
+        public virtual void LoadUserContext()
         {
             UserContext = Ioc.GetService<IUserContext>();
         }
