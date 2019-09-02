@@ -32,7 +32,7 @@ namespace Sand.Test
                 var data = new List<ExceptionlessLog>();
                 data.Add(data3);
                 var data2 = new ExceptionlessLog()
-                { Message = "测试一下对不对", Property = "test", PropertyName = "test1", Tag = "test2", UserId = "003", Data = data };
+                { Message = "测试一下对不对", Property = "test", PropertyName = "test1", Tag = "test2", UserId = "003", InputData = data };
                 Exceptionless.ExceptionlessClient.Default.Log(data2);
                 throw new Warning("测试异常日志记录");
             }
