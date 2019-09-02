@@ -18,7 +18,7 @@ namespace Sand.Mongo
     /// <summary>
     /// Mongo仓储
     /// </summary>
-    public class MongoService<T> : IMongoSerivce<T> where T : MongoEntity
+    public class MongoService<T> : IMongoService<T> where T : MongoEntity
     {
         #region MongoSpecific
         private IMongoCollection<T> _collection;

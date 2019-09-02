@@ -12,7 +12,7 @@ namespace Sand.Mongo
     /// mongo based repository interface
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IMongoSerivce<T> : IDependency where T : IMongoEntity
+    public interface IMongoService<T> : IDependency where T : IMongoEntity
     {
         #region MongoSpecific
 

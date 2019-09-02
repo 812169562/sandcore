@@ -125,6 +125,7 @@ namespace Sand.Mongo
         /// 最近更新时间
         /// </summary>
         [BsonRepresentation(BsonType.DateTime)]
+        [BsonElement("_m", Order = 2)]
         public virtual DateTime LastUpdateTime { get; set; }
         /// <summary>
         /// 最近更新者
@@ -133,7 +134,6 @@ namespace Sand.Mongo
         /// <summary>
         /// 最近更新人
         /// </summary>
-        [BsonElement("_m", Order = 2)]
         //[BsonRepresentation(BsonType.DateTime)]
         public virtual string LastUpdateName { get; set; }
         /// <summary>

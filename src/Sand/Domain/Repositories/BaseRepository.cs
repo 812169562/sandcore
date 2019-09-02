@@ -9,6 +9,7 @@ using Sand.Context;
 using Sand.Domain.Uow;
 using Sand.DI;
 using Autofac;
+using Microsoft.EntityFrameworkCore;
 
 namespace Sand.Domain.Repositories
 {
@@ -19,6 +20,10 @@ namespace Sand.Domain.Repositories
     /// <typeparam name="TPrimaryKey">实体主键类型</typeparam>
     public abstract class BaseRepository<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>
     {
+        /// <summary>
+        /// 实体集
+        /// </summary>
+       public virtual DbSet<TEntity> Table { get; }
         /// <summary>
         /// 工作单元
         /// </summary>

@@ -121,3 +121,4 @@ namespace Sand.Maps
             return MapTo<List<TDestination>>(source);
         }
     }
+}

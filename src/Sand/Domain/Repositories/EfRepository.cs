@@ -25,7 +25,7 @@ namespace Sand.Domain.Repositories
         /// <summary>
         /// 实体集
         /// </summary>
-        public virtual DbSet<TEntity> Table { get { return Uow.Set<TEntity>(); } }
+        public override DbSet<TEntity> Table { get { return Uow.Set<TEntity>(); } }
         /// <summary>
         /// 工作单元
         /// </summary>
