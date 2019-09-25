@@ -108,7 +108,7 @@ namespace Sand.Service
         /// <returns></returns>
         protected virtual void CreateOrder(TQuery query)
         {
-            query.OrderBy(t => t.CreateTime);
+            query.OrderBy(t => t.CreateTime,true);
         }
 
         /// <summary>

@@ -91,77 +91,6 @@ namespace Sand.Domain.Query
         /// <param name="predicate">查询条件</param>
         /// <param name="condition">该值为true则添加条件，否则忽略</param>
         IQuery<TEntity, TKey> WhereIf(Expression<Func<TEntity, bool>> predicate, bool condition);
-
-        /// <summary>
-        /// 添加查询条件,如果参数值为空，则忽略该条件，注意：一次仅能添加一个条件
-        /// </summary>
-        /// <param name="predicate">查询条件</param>
-        IQuery<TEntity, TKey> Filter(Expression<Func<TEntity, bool>> predicate);
-
-        /// <summary>
-        /// 添加查询条件
-        /// </summary>
-        /// <param name="propertyName">属性名</param>
-        /// <param name="value">值</param>
-        /// <param name="operator">运算符</param>
-        IQuery<TEntity, TKey> Filter(string propertyName, object value, Operator @operator = Operator.Equal);
-
-        /// <summary>
-        /// 添加查询条件
-        /// </summary>
-        /// <param name="criteria">规约对象,由于规约对象可能返回多个条件组合，所以由规约对象本身进行空值判断</param>
-        IQuery<TEntity, TKey> Filter(TEntity criteria);
-
-        /// <summary>
-        /// 添加整数范围过滤条件
-        /// </summary>
-        /// <typeparam name="TProperty">属性类型</typeparam>
-        /// <param name="propertyExpression">属性表达式，范例：t => t.Age</param>
-        /// <param name="min">最小值</param>
-        /// <param name="max">最大值</param>
-        IQuery<TEntity, TKey> FilterInt<TProperty>(Expression<Func<TEntity, TProperty>> propertyExpression, int? min,
-            int? max);
-
-        /// <summary>
-        /// 添加double范围过滤条件
-        /// </summary>
-        /// <typeparam name="TProperty">属性类型</typeparam>
-        /// <param name="propertyExpression">属性表达式，范例：t => t.Age</param>
-        /// <param name="min">最小值</param>
-        /// <param name="max">最大值</param>
-        IQuery<TEntity, TKey> FilterDouble<TProperty>(Expression<Func<TEntity, TProperty>> propertyExpression,
-            double? min, double? max);
-
-        /// <summary>
-        /// 添加decimal范围过滤条件
-        /// </summary>
-        /// <typeparam name="TProperty">属性类型</typeparam>
-        /// <param name="propertyExpression">属性表达式，范例：t => t.Age</param>
-        /// <param name="min">最小值</param>
-        /// <param name="max">最大值</param>
-        IQuery<TEntity, TKey> FilterDecimal<TProperty>(Expression<Func<TEntity, TProperty>> propertyExpression,
-            decimal? min, decimal? max);
-
-        /// <summary>
-        /// 添加日期范围过滤条件 - 不包含时间
-        /// </summary>
-        /// <typeparam name="TProperty">属性类型</typeparam>
-        /// <param name="propertyExpression">属性表达式，范例：t => t.Age</param>
-        /// <param name="min">最小值</param>
-        /// <param name="max">最大值</param>
-        IQuery<TEntity, TKey> FilterDate<TProperty>(Expression<Func<TEntity, TProperty>> propertyExpression,
-            DateTime? min, DateTime? max);
-
-        /// <summary>
-        /// 添加日期范围过滤条件 - 包含时间
-        /// </summary>
-        /// <typeparam name="TProperty">属性类型</typeparam>
-        /// <param name="propertyExpression">属性表达式，范例：t => t.Age</param>
-        /// <param name="min">最小值</param>
-        /// <param name="max">最大值</param>
-        IQuery<TEntity, TKey> FilterDateTime<TProperty>(Expression<Func<TEntity, TProperty>> propertyExpression,
-            DateTime? min, DateTime? max);
-
         /// <summary>
         /// 与连接
         /// </summary>
@@ -198,6 +127,11 @@ namespace Sand.Domain.Query
         /// 排序生成器
         /// </summary>
         private OrderByBuilder _orderBuilder { get; set; }
+
+        /// <summary>
+        /// 查询条件
+        /// </summary>
+        private Expression<Func<TEntity, bool>> _predicate;
 
         /// <summary>
         /// 查询数据
@@ -261,7 +195,7 @@ namespace Sand.Domain.Query
         /// <returns></returns>
         public Expression<Func<TEntity, bool>> GetPredicate()
         {
-            throw new NotImplementedException();
+            return _predicate;
         }
 
         /// <summary>
@@ -303,101 +237,6 @@ namespace Sand.Domain.Query
         /// <param name="condition"></param>
         /// <returns></returns>
         public IQuery<TEntity, TKey> WhereIf(Expression<Func<TEntity, bool>> predicate, bool condition)
-        {
-            throw new NotImplementedException();
-        }
-        /// <summary>
-        /// Filter
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        public IQuery<TEntity, TKey> Filter(Expression<Func<TEntity, bool>> predicate)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Filter
-        /// </summary>
-        /// <param name="propertyName"></param>
-        /// <param name="value"></param>
-        /// <param name="operator"></param>
-        /// <returns></returns>
-        public IQuery<TEntity, TKey> Filter(string propertyName, object value, Operator @operator = Operator.Equal)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Filter
-        /// </summary>
-        /// <param name="criteria"></param>
-        /// <returns></returns>
-        public IQuery<TEntity, TKey> Filter(TEntity criteria)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Filter
-        /// </summary>
-        /// <typeparam name="TProperty"></typeparam>
-        /// <param name="propertyExpression"></param>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
-        /// <returns></returns>
-        public IQuery<TEntity, TKey> FilterInt<TProperty>(Expression<Func<TEntity, TProperty>> propertyExpression, int? min, int? max)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="TProperty"></typeparam>
-        /// <param name="propertyExpression"></param>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
-        /// <returns></returns>
-        public IQuery<TEntity, TKey> FilterDouble<TProperty>(Expression<Func<TEntity, TProperty>> propertyExpression, double? min, double? max)
-        {
-            throw new NotImplementedException();
-        }
-        /// <summary>
-        /// FilterDecimal
-        /// </summary>
-        /// <typeparam name="TProperty"></typeparam>
-        /// <param name="propertyExpression"></param>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
-        /// <returns></returns>
-        public IQuery<TEntity, TKey> FilterDecimal<TProperty>(Expression<Func<TEntity, TProperty>> propertyExpression, decimal? min, decimal? max)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// FilterDate
-        /// </summary>
-        /// <typeparam name="TProperty"></typeparam>
-        /// <param name="propertyExpression"></param>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
-        /// <returns></returns>
-        public IQuery<TEntity, TKey> FilterDate<TProperty>(Expression<Func<TEntity, TProperty>> propertyExpression, DateTime? min, DateTime? max)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// FilterDateTime
-        /// </summary>
-        /// <typeparam name="TProperty"></typeparam>
-        /// <param name="propertyExpression"></param>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
-        /// <returns></returns>
-        public IQuery<TEntity, TKey> FilterDateTime<TProperty>(Expression<Func<TEntity, TProperty>> propertyExpression, DateTime? min, DateTime? max)
         {
             throw new NotImplementedException();
         }

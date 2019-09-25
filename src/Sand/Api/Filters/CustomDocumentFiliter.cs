@@ -12,9 +12,17 @@ using System.Xml;
 namespace Sand.Api.Filters
 {
     /// <summary>
+    /// 
+    /// </summary>
+    public class CustomDocumentFiliter : CustomDocumentFiliter<CustomDocument>, IDocumentFilter
+    {
+    }
+
+    /// <summary>
     /// 添加控制器解释
     /// </summary>
-    public class CustomDocumentFiliter : IDocumentFilter
+
+    public class CustomDocumentFiliter<T> : IDocumentFilter where T : CustomDocument, new()
     {
         /// <summary>
         /// 添加控制器解释
@@ -25,7 +33,8 @@ namespace Sand.Api.Filters
         {
             IList<Tag> tags = new List<Tag>();
             var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-            string _xmlPath = Path.Combine(Path.Combine(basePath, "Sand.Api.xml"));
+            var path = new T().XmlName;
+            string _xmlPath = Path.Combine(Path.Combine(basePath, path));
             ConcurrentDictionary<string, string> _controllerDescDict = new ConcurrentDictionary<string, string>();
             if (File.Exists(_xmlPath))
             {
@@ -43,7 +52,7 @@ namespace Sand.Api.Filters
                         _summaryNode = _node.SelectSingleNode("summary");
                         string[] _names = _type.Split('.');
                         string _key = _names[_names.Length - 1];
-                        if (_key.IndexOf("Controller") > -1&&_key!= "BaseApiController")
+                        if (_key.IndexOf("Controller") > -1 && _key != "BaseApiController")
                         {
                             _key = _key.Substring(0, _key.Length - "Controller".Length);
                             tags.Add(new Tag() { Name = _key, Description = _summaryNode.InnerText });

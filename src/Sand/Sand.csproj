@@ -74,7 +74,7 @@
     <PackageReference Include="EasyCaching.Core" Version="0.6.1" />
     <PackageReference Include="EasyCaching.CSRedis" Version="0.6.1" />
     <PackageReference Include="EasyCaching.InMemory" Version="0.6.1" />
-    <PackageReference Include="EasyCaching.Interceptor.AspectCore" Version="0.6.1" />
+    <PackageReference Include="EasyCaching.Interceptor.AspectCore" Version="0.6.1.1" />
     <PackageReference Include="Enums.NET" Version="2.3.2" />
     <PackageReference Include="Exceptionless.NLog" Version="4.3.2027" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
@@ -83,7 +83,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.1.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.9.1" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.4" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.5" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.4" />
     <PackageReference Include="NPinyinCore" Version="0.2.0" />
     <PackageReference Include="PaySharp.Core" Version="1.0.7" />
