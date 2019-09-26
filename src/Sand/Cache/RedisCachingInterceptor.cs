@@ -17,6 +17,7 @@ using EasyCaching.Core.Configurations;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Sand.Extensions;
+using Sand.Helpers;
 
 namespace Sand.Cache
 {
@@ -94,6 +95,11 @@ namespace Sand.Cache
                     : context.ServiceMethod.ReturnType;
 
             var cacheKey = KeyGenerator.GetCacheKey(context.ServiceMethod, context.Parameters, attribute.CacheKeyPrefix);
+            if (context.Parameters != null && context.Parameters.Length > 0)
+            {
+                var md5key = Encrypt.Md5By16(Json.ToJson(context.Parameters));
+                cacheKey = cacheKey + ":" + md5key;
+            }
             object cacheValue = null;
             var isAvailable = true;
             try

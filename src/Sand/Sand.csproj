@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <LangVersion>7.1</LangVersion>
-    <Version>1.1.37</Version>
+    <Version>1.1.38</Version>
     <Authors>yy</Authors>
     <Product>yy</Product>
     <Description>新增对mongodb支持，优化异常处理机制，升级automapper 到9.0</Description>
@@ -13,8 +13,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/812169562/sandcore.git</RepositoryUrl>
     <RepositoryType>C#</RepositoryType>
-    <AssemblyVersion>1.1.37.0</AssemblyVersion>
-    <FileVersion>1.1.37.0</FileVersion>
+    <AssemblyVersion>1.1.38.0</AssemblyVersion>
+    <FileVersion>1.1.38.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -54,6 +54,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Cloud\Tencent\Tencentcloud\" />
     <Folder Include="Domain\Services\" />
     <Folder Include="Domain\Events\" />
     <Folder Include="EntityFramework\EFCore\" />
@@ -65,7 +66,7 @@
     <PackageReference Include="AspectCore.Extensions.Autofac" Version="1.3.0" />
     <PackageReference Include="AspectCore.Extensions.DependencyInjection" Version="1.3.0" />
     <PackageReference Include="Autofac" Version="4.9.4" />
-    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.0" />
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="Dapper" Version="2.0.4" />
     <PackageReference Include="Dapper.Contrib" Version="2.0.4" />
@@ -87,7 +88,7 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.4" />
     <PackageReference Include="NPinyinCore" Version="0.2.0" />
     <PackageReference Include="PaySharp.Core" Version="1.0.7" />
-    <PackageReference Include="Polly" Version="7.1.0" />
+    <PackageReference Include="Polly" Version="7.1.1" />
     <PackageReference Include="Pomelo.Data.MySql" Version="1.0.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql.Design" Version="1.1.2" />
@@ -97,6 +98,7 @@
     <PackageReference Include="StaticDotNet.EntityFrameworkCore.ModelConfiguration" Version="1.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="4.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="4.0.1" />
+    <PackageReference Include="TencentCloudSDK" Version="3.0.39" />
   </ItemGroup>
 
   <ItemGroup>
