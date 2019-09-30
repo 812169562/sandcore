@@ -3,18 +3,18 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <LangVersion>7.1</LangVersion>
-    <Version>1.1.38</Version>
+    <Version>1.1.39</Version>
     <Authors>yy</Authors>
     <Product>yy</Product>
-    <Description>新增对mongodb支持，优化异常处理机制，升级automapper 到9.0</Description>
+    <Description>增加redis缓存aop</Description>
     <Copyright>MIT</Copyright>
     <PackageLicenseUrl>https://github.com/812169562/sandcore/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/812169562/sandcore.git</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/812169562/sandcore.git</RepositoryUrl>
     <RepositoryType>C#</RepositoryType>
-    <AssemblyVersion>1.1.38.0</AssemblyVersion>
-    <FileVersion>1.1.38.0</FileVersion>
+    <AssemblyVersion>1.1.39.0</AssemblyVersion>
+    <FileVersion>1.1.39.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -84,6 +84,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.1.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.9.1" />
+    <PackageReference Include="MySqlConnector" Version="0.59.0" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.5" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.4" />
     <PackageReference Include="NPinyinCore" Version="0.2.0" />

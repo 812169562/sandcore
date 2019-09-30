@@ -194,13 +194,13 @@ namespace Sand.Domain.Entities
         /// <summary>
         /// 创建者
         /// </summary>
-        [Required(ErrorMessage = "创建人不能为空")]
+        [Required(ErrorMessage = "请登录再操作")]
         [MaxLength(36)]
         public virtual string CreateId { get; set; }
         /// <summary>
         /// 创建人
         /// </summary>
-        [Required(ErrorMessage = "创建人不能为空")]
+        [Required(ErrorMessage = "请登录再操作")]
         [MaxLength(50)]
         public virtual string CreateName { get; set; }
         /// <summary>
@@ -211,12 +211,12 @@ namespace Sand.Domain.Entities
         /// <summary>
         /// 最近更新者
         /// </summary>
-        [Required(ErrorMessage = "最近更新人不能为空")]
+        [Required(ErrorMessage = "请登录再操作")]
         public virtual string LastUpdateId { get; set; }
         /// <summary>
         /// 最近更新人
         /// </summary>
-        [Required(ErrorMessage = "最近更新人不能为空")]
+        [Required(ErrorMessage = "请登录再操作")]
         [MaxLength(50)]
         public virtual string LastUpdateName { get; set; }
         /// <summary>

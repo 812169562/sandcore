@@ -1,6 +1,7 @@
 ﻿using AspectCore.Configuration;
 using AspectCore.Extensions.Autofac;
 using Autofac;
+using EasyCaching.Core;
 using EasyCaching.Core.Configurations;
 using EasyCaching.Core.Interceptor;
 using EasyCaching.Interceptor.AspectCore;
@@ -66,7 +67,7 @@ namespace Sand.DI
 
             if (config.CacheProviderName.IsEmpty())
             {
-                config.CacheProviderName = "DefaultCSRedis";
+                config.CacheProviderName = EasyCachingConstValue.DefaultCSRedisName;
             }
             action(config);
 
