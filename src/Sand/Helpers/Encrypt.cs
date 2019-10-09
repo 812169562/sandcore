@@ -224,33 +224,61 @@ namespace Sand.Helpers
         /// <summary>
         /// AES密钥
         /// </summary>
-        public static string AesKey = "QqP2AF3utIarcBqdhYTZpVGbiNQ9M5AL";
+        public const string AesKey = "QqP2AF3utIarcBqdhYTZpVGbiNQ9M5AL";
 
         /// <summary>
         /// AES加密
         /// </summary>
         /// <param name="value">待加密的值</param>
-        public static string ToAesEncrypt(this string value)
+        /// <param name="key">key</param>
+        public static string ToAesEncrypt(this string value, string key= AesKey)
         {
             if (string.IsNullOrEmpty(value))
             {
                 return "";
             }
-            return AesEncrypt(value, AesKey);
+            return AesEncrypt(value, key);
         }
 
         /// <summary>
         /// AES加密
         /// </summary>
         /// <param name="value">待加密的值</param>
-        public static string ToAesDecrypt(this string value)
+        /// <param name="key">key</param>
+        public static string ToAesDecrypt(this string value, string key = AesKey)
         {
             if (string.IsNullOrEmpty(value))
             {
                 return "";
             }
-            return AesDecrypt(value, AesKey);
+            return AesDecrypt(value, key);
         }
+
+        ///// <summary>
+        ///// AES加密
+        ///// </summary>
+        ///// <param name="value">待加密的值</param>
+        //public static string ToAesEncrypt(this string value)
+        //{
+        //    if (string.IsNullOrEmpty(value))
+        //    {
+        //        return "";
+        //    }
+        //    return AesEncrypt(value, AesKey);
+        //}
+
+        ///// <summary>
+        ///// AES加密
+        ///// </summary>
+        ///// <param name="value">待加密的值</param>
+        //public static string ToAesDecrypt(this string value)
+        //{
+        //    if (string.IsNullOrEmpty(value))
+        //    {
+        //        return "";
+        //    }
+        //    return AesDecrypt(value, AesKey);
+        //}
 
         /// <summary>
         /// AES加密
