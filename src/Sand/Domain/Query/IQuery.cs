@@ -127,12 +127,10 @@ namespace Sand.Domain.Query
         /// 排序生成器
         /// </summary>
         private OrderByBuilder _orderBuilder { get; set; }
-
         /// <summary>
         /// 查询条件
         /// </summary>
         private Expression<Func<TEntity, bool>> _predicate;
-
         /// <summary>
         /// 查询数据
         /// </summary>
