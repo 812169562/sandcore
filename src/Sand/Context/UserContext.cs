@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,7 +49,7 @@ namespace Sand.Context
         /// <summary>
         /// 微信识别号
         /// </summary>
-        IThird ThirdData { get; set; }
+        dynamic ThirdData { get; set; }
         /// <summary>
         /// 系统用户角色类型
         /// </summary>
@@ -95,7 +96,7 @@ namespace Sand.Context
         /// <summary>
         /// 
         /// </summary>
-        public IThird ThirdData { get; set; }
+        public dynamic ThirdData { get; set; }
 
         /// <summary>
         /// 
@@ -160,7 +161,7 @@ namespace Sand.Context
         /// <summary>
         /// 
         /// </summary>
-        public IThird ThirdData { get; set; }
+        public dynamic ThirdData { get; set; }
 
         /// <summary>
         /// 设置测试数据
@@ -199,14 +200,32 @@ namespace Sand.Context
         /// <summary>
         /// 超级管理员
         /// </summary>
+        [Description("超级管理员")]
         SuperAdmin = 1,
         /// <summary>
         /// 连锁诊所管理员
         /// </summary>
+        [Description("连锁诊所管理员")]
         TenantAdmin = 2,
         /// <summary>
         /// 门店管理员
         /// </summary>
-        StroeAdmin = 3
+        [Description("门店管理员")]
+        StroeAdmin = 3,
+        /// <summary>
+        /// 分店财务
+        /// </summary>
+        [Description("分店财务")]
+        Finance = 4,
+        /// <summary>
+        /// 医生
+        /// </summary>
+        [Description("医生")]
+        Doctor = 5,
+        /// <summary>
+        /// 助手
+        /// </summary>
+        [Description("助手")]
+        Ass = 6,
     }
 }
