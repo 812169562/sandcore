@@ -25,7 +25,7 @@ namespace Sand.Domain.Uow
         /// <summary>
         /// 提交事务
         /// </summary>
-        Task CompleteAsync();
+       Task CompleteAsync();
         /// <summary>
         /// 回滚事务
         /// </summary>

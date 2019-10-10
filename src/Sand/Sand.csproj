@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <LangVersion>7.1</LangVersion>
-    <Version>1.1.40</Version>
+    <Version>1.1.41</Version>
     <Authors>yy</Authors>
     <Product>yy</Product>
     <Description>增加redis缓存aop</Description>
@@ -13,8 +13,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/812169562/sandcore.git</RepositoryUrl>
     <RepositoryType>C#</RepositoryType>
-    <AssemblyVersion>1.1.40.0</AssemblyVersion>
-    <FileVersion>1.1.40.0</FileVersion>
+    <AssemblyVersion>1.1.41.0</AssemblyVersion>
+    <FileVersion>1.1.41.0</FileVersion>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <NeutralLanguage />
   </PropertyGroup>
@@ -87,7 +87,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.1.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.9.2" />
-    <PackageReference Include="MySqlConnector" Version="0.59.2" />
+    <PackageReference Include="MySqlConnector" Version="0.49.2" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.6" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.4" />
     <PackageReference Include="NPinyinCore" Version="0.2.0" />
