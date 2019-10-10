@@ -137,6 +137,15 @@ namespace Sand.Extensions
         }
 
         /// <summary>
+        /// 获取分页总条数SQL
+        /// </summary>
+        /// <param name="str">获取查询条数SQL</param>
+        /// <returns></returns>
+        public static string MsPageCount(this string str)
+        {
+            return "select count(*)  as PageCount   " + str + "";
+        }
+        /// <summary>
         /// 返回like
         /// </summary>
         /// <param name="str"></param>

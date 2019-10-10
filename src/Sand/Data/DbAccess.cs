@@ -275,7 +275,7 @@ namespace Sand.Data
             var countSql = sql.PageCount();
             parameters.Add("PageIndex", (query.PageIndex - 1) * query.PageSize);
             parameters.Add("PageSize", query.PageSize);
-            WriteTraceLogPage(dataSql, dataSql, parameters);
+            WriteTraceLogPage(dataSql, countSql, parameters);
             var count = DbConnection.QueryFirst<int>(countSql, parameters);
             var data = DbConnection.Query<TResult>(dataSql, parameters);
             pagedResult.PageIndex = query.PageIndex;
@@ -305,7 +305,7 @@ namespace Sand.Data
             var countSql = sql.PageCount();
             parameters.Add("PageIndex", (query.PageIndex - 1) * query.PageSize);
             parameters.Add("PageSize", query.PageSize);
-            WriteTraceLogPage(dataSql, dataSql, parameters);
+            WriteTraceLogPage(dataSql, countSql, parameters);
             var count = await DbConnection.QueryFirstAsync<int>(countSql, parameters);
             var data = await DbConnection.QueryAsync<TResult>(dataSql, parameters);
             pagedResult.PageIndex = query.PageIndex;
@@ -815,11 +815,11 @@ namespace Sand.Data
             var dataSql = selectSql.Add(", ROW_NUMBER() over (" + orderbySql + ") as NUMBER");
             dataSql = dataSql.Add(whereSql);
             dataSql = "select *   from ( " + dataSql + " ) Temp_M where NUMBER<@end and NUMBER>@start";
-            var countSql = whereSql.PageCount();
+            var countSql = whereSql.MsPageCount();
             parameters.Add("start", (query.PageIndex - 1) * query.PageSize);
             parameters.Add("end", query.PageSize * query.PageIndex + 1);
             _log.OperationTime("分页查询开始：" + DateTime.Now);
-            WriteTraceLogPage(dataSql, dataSql, parameters);
+            WriteTraceLogPage(dataSql, countSql, parameters);
             var count = DbConnection.QueryFirst<int>(countSql, parameters);
             var data = DbConnection.Query<TResult>(dataSql, parameters);
             pagedResult.PageIndex = query.PageIndex;
@@ -847,11 +847,11 @@ namespace Sand.Data
             var dataSql = selectSql.Add(", ROW_NUMBER() over (" + orderbySql + ") as NUMBER");
             dataSql = dataSql.Add(whereSql);
             dataSql = "select *   from ( " + dataSql + " ) Temp_M where NUMBER<@end and NUMBER>@start";
-            var countSql = whereSql.PageCount();
+            var countSql = whereSql.MsPageCount();
             parameters.Add("start", (query.PageIndex - 1) * query.PageSize);
             parameters.Add("end", query.PageSize * query.PageIndex + 1);
             _log.OperationTime("分页查询开始：" + DateTime.Now);
-            WriteTraceLogPage(dataSql, dataSql, parameters);
+            WriteTraceLogPage(dataSql, countSql, parameters);
             var count = await DbConnection.QueryFirstAsync<int>(countSql, parameters);
             var data = await DbConnection.QueryAsync<TResult>(dataSql, parameters);
             pagedResult.PageIndex = query.PageIndex;
