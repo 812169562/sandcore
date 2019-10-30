@@ -150,7 +150,7 @@ namespace Sand.Domain.Entities
                 userContext = new TestUserContext();
             }
             this.CreateId = this.CreateId ?? userContext.LoginKey;
-            this.CreateName = this.CreateId ?? userContext.LoginName;
+            this.CreateName = this.CreateName ?? userContext.LoginName;
             this.CreateTime = DateTime.Now;
             this.StroeId = this.CreateId ?? userContext.StroeId;
             this.TenantId = this.TenantId??this.CreateId ?? userContext.TenantId;
@@ -165,7 +165,7 @@ namespace Sand.Domain.Entities
         public void SetUpdateUser(IUserContext userContext)
         {
             this.LastUpdateId = this.LastUpdateId ?? userContext.LoginKey;
-            this.LastUpdateName = this.LastUpdateId ?? userContext.LoginName;
+            this.LastUpdateName = this.LastUpdateName ?? userContext.LoginName;
             this.LastUpdateTime = DateTime.Now;
             this.Version = Uuid.Next();
         }
