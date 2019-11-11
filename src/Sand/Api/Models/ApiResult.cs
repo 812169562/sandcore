@@ -79,7 +79,7 @@ namespace Sand.Api.Models
             {
                 _jsonSerializerSettings = new JsonSerializerSettings();
                 _jsonSerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-                _jsonSerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+                _jsonSerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
                 _jsonSerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             }
         }
