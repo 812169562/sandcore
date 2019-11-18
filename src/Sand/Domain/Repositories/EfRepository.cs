@@ -13,6 +13,7 @@ using Sand.EntityFramework.UpdatePlus.Extensions;
 using Sand.EntityFramework.UpdatePlus;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Sand.Helpers;
+using Sand.Context;
 
 namespace Sand.Domain.Repositories
 {/// <summary>
@@ -195,6 +196,39 @@ namespace Sand.Domain.Repositories
             oldEntry.CurrentValues.SetValues(entity);
             return entity;
         }
+
+        /// <summary>
+        /// 更新数据(添加更新人信息)
+        /// </summary>
+        /// <param name="entity">更新实体</param>
+        /// <param name="context">用户信息</param>
+        /// <returns></returns>
+        public override async Task<TEntity> Update(TEntity entity, IUserContext context)
+        {
+            if (entity == null)
+                throw new Warning("操作错误:保存的对象已经不存在");
+            Uow.Entry(entity).State = EntityState.Detached;
+            var old = await this.RetrieveByIdAsync(entity.Id);
+            if (old.Version != entity.Version)
+            {
+                if (old.Version == null || entity.Version == null)
+                    throw new Warning("当前操作数据不是最新数据,请重新刷新页面再操作！");
+                if (old.Version != entity.Version)
+                    throw new Warning("当前操作数据不是最新数据,请重新刷新页面再操作！");
+            }
+            var oldEntry = Uow.Entry(old);
+            oldEntry.State = EntityState.Detached;
+            oldEntry.CurrentValues[nameof(entity.Version)] = entity.Version;
+            oldEntry = Table.Attach(old);
+            entity.SetUpdateUser(context);
+            entity.CreateId = old.CreateId;
+            entity.CreateName = old.CreateName;
+            entity.CreateTime = old.CreateTime;
+            entity.Validation();
+            oldEntry.CurrentValues.SetValues(entity);
+            return entity;
+        }
+
         /// <summary>
         /// 部分跟新实体（根据编号）
         /// </summary>
@@ -361,7 +395,7 @@ namespace Sand.Domain.Repositories
         /// <returns></returns>
         public override IList<TEntity> RetrieveAll()
         {
-           return Table.Where(t => true).ToList();
+            return Table.Where(t => true).ToList();
         }
     }
     /// <summary>

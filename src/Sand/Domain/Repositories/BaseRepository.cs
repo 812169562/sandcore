@@ -23,7 +23,7 @@ namespace Sand.Domain.Repositories
         /// <summary>
         /// 实体集
         /// </summary>
-       public virtual DbSet<TEntity> Table { get; }
+        public virtual DbSet<TEntity> Table { get; }
         /// <summary>
         /// 工作单元
         /// </summary>
@@ -248,7 +248,13 @@ namespace Sand.Domain.Repositories
         {
             return await Task.FromResult(Update(entity));
         }
-
+        /// <summary>
+        /// 更新数据(添加更新人信息)
+        /// </summary>
+        /// <param name="entity">更新实体</param>
+        /// <param name="context">用户信息</param>
+        /// <returns></returns>
+        public abstract Task<TEntity> Update(TEntity entity, IUserContext context);
         /// <summary>
         /// 异步更新实体
         /// </summary>

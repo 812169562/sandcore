@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Sand.Context;
 using Sand.Dependency;
 using Sand.Domain.Entities;
 using Sand.Filter;
@@ -151,6 +152,13 @@ namespace Sand.Domain.Repositories
         /// <returns>更新后实体</returns>
         TEntity Update(TEntity entity);
 
+        /// <summary>
+        /// 更新数据(添加更新人信息)
+        /// </summary>
+        /// <param name="entity">更新实体</param>
+        /// <param name="context">用户信息</param>
+        /// <returns></returns>
+        Task<TEntity> Update(TEntity entity, IUserContext context);
         /// <summary>
         /// 更新实体
         /// </summary>

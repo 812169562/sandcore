@@ -149,11 +149,11 @@ namespace Sand.Domain.Entities
             {
                 userContext = new TestUserContext();
             }
-            this.CreateId = this.CreateId ?? userContext.LoginKey;
-            this.CreateName = this.CreateName ?? userContext.LoginName;
+            this.CreateId = this.CreateId.IsEmpty() ? userContext.LoginKey : this.CreateId;
+            this.CreateName = this.CreateName.IsEmpty() ? userContext.LoginName : this.CreateName;
             this.CreateTime = DateTime.Now;
-            this.StroeId = this.CreateId ?? userContext.StroeId;
-            this.TenantId = this.TenantId??this.CreateId ?? userContext.TenantId;
+            this.StroeId = this.CreateId;
+            this.TenantId = this.CreateId;
             this.IsEnable = true;
             //this.Status = 1;
             this.SetUpdateUser(userContext);
@@ -164,8 +164,8 @@ namespace Sand.Domain.Entities
         /// <param name="userContext">用户上下文</param>
         public void SetUpdateUser(IUserContext userContext)
         {
-            this.LastUpdateId = this.LastUpdateId ?? userContext.LoginKey;
-            this.LastUpdateName = this.LastUpdateName ?? userContext.LoginName;
+            this.LastUpdateId = userContext.LoginKey;
+            this.LastUpdateName = userContext.LoginName;
             this.LastUpdateTime = DateTime.Now;
             this.Version = Uuid.Next();
         }
