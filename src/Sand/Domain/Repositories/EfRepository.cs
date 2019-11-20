@@ -16,11 +16,12 @@ using Sand.Helpers;
 using Sand.Context;
 
 namespace Sand.Domain.Repositories
-{/// <summary>
-/// 
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TPrimaryKey"></typeparam>
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
+    /// <typeparam name="TPrimaryKey"></typeparam>
     public class EfRepository<TEntity, TPrimaryKey> : BaseRepository<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>, new()
     {
         /// <summary>
