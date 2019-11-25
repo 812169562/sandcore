@@ -34,7 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Cache\RedisHelper.cs" />
     <Compile Remove="DI\Container.cs" />
     <Compile Remove="Events\EventBusBase.cs" />
     <Compile Remove="Events\EventBusPack.cs" />
@@ -56,7 +55,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Cloud\Tencent\Tencentcloud\" />
+    <Folder Include="Cloud\Tencent\Ocr\" />
     <Folder Include="Domain\Services\" />
     <Folder Include="Domain\Events\" />
     <Folder Include="EntityFramework\EFCore\" />

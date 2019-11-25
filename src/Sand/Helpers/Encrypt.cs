@@ -148,7 +148,6 @@ namespace Sand.Helpers
             var result = transform.TransformFinalBlock(bytes, 0, bytes.Length);
             return System.Convert.ToBase64String(result);
         }
-
         /// <summary>
         /// DES解密
         /// </summary>
@@ -194,6 +193,18 @@ namespace Sand.Helpers
             var result = transform.TransformFinalBlock(bytes, 0, bytes.Length);
             return encoding.GetString(result);
         }
+        /// <summary>
+        /// 获取md5之后的base64值
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="isToLower"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public static string GetMd5Base64String(this string value, bool isToLower = true, string encoding = "UTF-8")
+        {
+            var md5 = isToLower ? Md5By32(value).ToLower() : Md5By32(value).ToUpper();
+            return System.Convert.ToBase64String(Encoding.GetEncoding(encoding).GetBytes(md5));
+        }
 
         #endregion
 
@@ -231,7 +242,7 @@ namespace Sand.Helpers
         /// </summary>
         /// <param name="value">待加密的值</param>
         /// <param name="key">key</param>
-        public static string ToAesEncrypt(this string value, string key= AesKey)
+        public static string ToAesEncrypt(this string value, string key = AesKey)
         {
             if (string.IsNullOrEmpty(value))
             {
