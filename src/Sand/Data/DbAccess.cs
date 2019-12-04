@@ -153,13 +153,6 @@ namespace Sand.Data
         #endregion 
 
         #region 构造
-
-        ///// <summary>
-        ///// Sql数据库访问
-        ///// </summary>
-        //public DbAccess() : this(DefaultIocConfig.Container.Resolve<ISqlConfig>())
-        //{
-        //}
         /// <summary>
         /// Sql数据库访问
         /// </summary>
