@@ -4,6 +4,7 @@ using Sand.Domain.Uow;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Sand.Log.Less;
 
 namespace Sand.Filter
 {
@@ -55,9 +56,8 @@ namespace Sand.Filter
                 else
                 {
                     _log = Log.Log.GetLog("UowAsync");
-                    _log.Error(ex.Message);
+                    ex.Submit();
                 }
-
                 throw ex;
             }
         }

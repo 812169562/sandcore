@@ -121,6 +121,7 @@ namespace Sand.Domain.Query
     /// </summary>
     /// <typeparam name="TEntity">实体</typeparam>
     /// <typeparam name="TKey">实体Key</typeparam>
+    [Serializable]
     public class BaseQuery<TEntity, TKey> : IQuery<TEntity, TKey> where TEntity : class, IEntity
     {
         /// <summary>
@@ -284,7 +285,7 @@ namespace Sand.Domain.Query
     /// 查询对象
     /// </summary>
     /// <typeparam name="TEntity">实体</typeparam>
-
+    [Serializable]
     public class BaseQuery<TEntity> : BaseQuery<TEntity, string> where TEntity : class, IEntity
     {
     }

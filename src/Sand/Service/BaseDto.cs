@@ -70,6 +70,7 @@ namespace Sand.Service
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [DataContract]
+    [Serializable]
     public class BaseDto<T> : IDto<T>
     {
         /// <summary>
@@ -177,6 +178,7 @@ namespace Sand.Service
     /// Dto
     /// </summary>
     [DataContract]
+    [Serializable]
     public class BaseDto : BaseDto<string>
     {
         /// <summary>

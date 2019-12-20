@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sand", "src\Sand\Sand.cspro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sand.Test", "src\Sand.Test\Sand.Test.csproj", "{D65460AC-811B-4651-A27B-587AECC743B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{29F10AA1-0B6D-4AFA-B995-E9DBD2C29333}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{29F10AA1-0B6D-4AFA-B995-E9DBD2C29333}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

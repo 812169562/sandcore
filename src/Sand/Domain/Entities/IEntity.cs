@@ -308,5 +308,6 @@ namespace Sand.Domain.Entities
     /// <summary>
     /// 实体
     /// </summary>
+    [Serializable]
     public abstract class Entity : Entity<string> { }
 }
