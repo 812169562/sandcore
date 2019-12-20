@@ -10,6 +10,7 @@ namespace Sand.Result
     /// 返回结果集
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    [Serializable]
     public class ResultData<T>
     {
         /// <summary>

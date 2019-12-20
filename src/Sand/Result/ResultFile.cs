@@ -7,6 +7,7 @@ namespace Sand.Result
     /// <summary>
     /// 文件返回类型
     /// </summary>
+    [Serializable]
     public class ResultFile
     {
         /// <summary>

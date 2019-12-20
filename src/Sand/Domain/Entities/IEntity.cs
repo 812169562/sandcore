@@ -114,6 +114,7 @@ namespace Sand.Domain.Entities
     /// 实体
     /// </summary>
     /// <typeparam name="TPrimaryKey">主键类型</typeparam>
+    [Serializable]
     public abstract class Entity<TPrimaryKey> : IEntity<TPrimaryKey>
     {
         /// <summary>

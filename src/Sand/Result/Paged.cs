@@ -10,6 +10,7 @@ namespace Sand.Result
     /// 分页
     /// </summary>
     /// <typeparam name="T">分页类型</typeparam>
+    [Serializable]
     public class Paged<T>
     {
         /// <summary>
