@@ -7,6 +7,7 @@ namespace Sand.Open
 /// <summary>
 /// 第三方返回Dto
 /// </summary>
+[Serializable]
 public class ThirdDto
 {
     /// <summary>
