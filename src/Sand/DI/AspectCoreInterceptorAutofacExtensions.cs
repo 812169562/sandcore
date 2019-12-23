@@ -28,8 +28,8 @@ namespace Sand.DI
         {
             builder.RegisterType<DefaultEasyCachingKeyGenerator>().As<IEasyCachingKeyGenerator>();
 
-            //builder.RegisterType<EasyCachingInterceptor>();
-            builder.RegisterType<RedisCachingInterceptor>();
+            builder.RegisterType<EasyCachingInterceptor>();
+            // builder.RegisterType<RedisCachingInterceptor>();
 
             var config = new EasyCachingInterceptorOptions();
 

@@ -147,28 +147,35 @@ namespace Sand.Cache
             }
             // Invoke the method if we don't have a cache hit
             await next(context);
-            if (isAvailable)
+            try
             {
-                // get the result
-                var returnValue = context.IsAsync()
-                    ? await context.UnwrapAsyncReturnValue()
-                    : context.ReturnValue;
-
-                // should we do something when method return null?
-                // 1. cached a null value for a short time
-                // 2. do nothing
-                if (returnValue != null && cacheKey.IsNotWhiteSpaceEmpty())
+                if (isAvailable)
                 {
-                    if (attribute.IsHybridProvider)
+                    // get the result
+                    var returnValue = context.IsAsync()
+                        ? await context.UnwrapAsyncReturnValue()
+                        : context.ReturnValue;
+
+                    // should we do something when method return null?
+                    // 1. cached a null value for a short time
+                    // 2. do nothing
+                    if (returnValue != null && cacheKey.IsNotWhiteSpaceEmpty())
                     {
-                        await HybridCachingProvider.SetAsync(cacheKey, returnValue, TimeSpan.FromSeconds(attribute.Expiration));
-                    }
-                    else
-                    {
-                        var _cacheProvider = CacheProviderFactory.GetCachingProvider(attribute.CacheProviderName ?? Options.Value.CacheProviderName);
-                        await _cacheProvider.SetAsync(cacheKey, returnValue, TimeSpan.FromSeconds(attribute.Expiration));
+                        if (attribute.IsHybridProvider)
+                        {
+                            await HybridCachingProvider.SetAsync(cacheKey, returnValue, TimeSpan.FromSeconds(attribute.Expiration));
+                        }
+                        else
+                        {
+                            var _cacheProvider = CacheProviderFactory.GetCachingProvider(attribute.CacheProviderName ?? Options.Value.CacheProviderName);
+                            await _cacheProvider.SetAsync(cacheKey, returnValue, TimeSpan.FromSeconds(attribute.Expiration));
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Log.Log.GetLog("Debug").Error("缓存失败" + ex.Message);
             }
         }
     }
