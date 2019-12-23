@@ -26,11 +26,18 @@ namespace Sand.DI
         /// </summary>
         public static void AddAspectCoreInterceptor(this ContainerBuilder builder, Action<EasyCachingInterceptorOptions> action)
         {
+            if (action == null)
+            {
+                action = new Action<EasyCachingInterceptorOptions>((EasyCachingInterceptorOptions) => { });
+            }
             builder.RegisterType<DefaultEasyCachingKeyGenerator>().As<IEasyCachingKeyGenerator>();
 
-            builder.RegisterType<EasyCachingInterceptor>();
+            builder.RegisterType<MemoryCachingInterceptor>();
             var config = new EasyCachingInterceptorOptions();
-
+            if (config.CacheProviderName.IsEmpty())
+            {
+                config.CacheProviderName = EasyCachingConstValue.DefaultInMemoryName;
+            }
             action(config);
 
             var options = Options.Create(config);
@@ -39,8 +46,8 @@ namespace Sand.DI
 
             builder.RegisterDynamicProxy(configure =>
             {
-                bool all(MethodInfo x) => x.CustomAttributes.Any(data => typeof(EasyCachingAbleAttribute).GetTypeInfo().IsAssignableFrom(data.AttributeType));
-                configure.Interceptors.AddTyped<EasyCachingInterceptor>(all);
+                bool all(MethodInfo x) => x.CustomAttributes.Any(data => typeof(MemoryCachingAttribute).GetTypeInfo().IsAssignableFrom(data.AttributeType));
+                configure.Interceptors.AddTyped<MemoryCachingInterceptor>(all);
             });
         }
 
