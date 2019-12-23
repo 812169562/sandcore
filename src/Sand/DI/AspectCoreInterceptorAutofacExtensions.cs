@@ -29,8 +29,6 @@ namespace Sand.DI
             builder.RegisterType<DefaultEasyCachingKeyGenerator>().As<IEasyCachingKeyGenerator>();
 
             builder.RegisterType<EasyCachingInterceptor>();
-            // builder.RegisterType<RedisCachingInterceptor>();
-
             var config = new EasyCachingInterceptorOptions();
 
             action(config);
@@ -43,8 +41,6 @@ namespace Sand.DI
             {
                 bool all(MethodInfo x) => x.CustomAttributes.Any(data => typeof(EasyCachingAbleAttribute).GetTypeInfo().IsAssignableFrom(data.AttributeType));
                 configure.Interceptors.AddTyped<EasyCachingInterceptor>(all);
-                //bool allredis(MethodInfo x) => x.CustomAttributes.Any(data => typeof(RedisCachingAttribute).GetTypeInfo().IsAssignableFrom(data.AttributeType));
-                //configure.Interceptors.AddTyped<RedisCachingInterceptor>(allredis);
             });
         }
 
