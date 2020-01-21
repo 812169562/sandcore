@@ -22,8 +22,7 @@ namespace Sand.Helpers
         {
             var type = Common.GetType<T>();
             var result = GetDescription(type);
-            if (string.IsNullOrWhiteSpace(result))
-                return type.Name;
+            if (string.IsNullOrWhiteSpace(result)) return type.Name;
             return result;
         }
 
@@ -416,6 +415,77 @@ namespace Sand.Helpers
                 }
             }
             return false;
+        }
+
+        /// <summary>
+        /// 是否集合
+        /// </summary>
+        /// <param name="type">类型</param>
+        public static bool IsCollection(Type type)
+        {
+            if (type.IsArray)
+                return true;
+            return IsGenericCollection(type);
+        }
+        /// <summary>
+        /// 从目录中获取所有程序集
+        /// </summary>
+        /// <param name="directoryPath">目录绝对路径</param>
+        public static List<Assembly> GetAssemblies(string directoryPath)
+        {
+            return Directory.GetFiles(directoryPath, "*.*", SearchOption.AllDirectories).ToList()
+                .Where(t => t.EndsWith(".exe") || t.EndsWith(".dll"))
+                .Select(path => Assembly.Load(new AssemblyName(path))).ToList();
+        }
+
+        /// <summary>
+        /// 获取公共属性列表
+        /// </summary>
+        /// <param name="instance">实例</param>
+        public static List<Item> GetPublicProperties(object instance)
+        {
+            var properties = instance.GetType().GetProperties();
+            return properties.ToList().Select(t => new Item(t.Name, t.GetValue(instance).ToString())).ToList();
+        }
+
+        /// <summary>
+        /// 获取顶级基类
+        /// </summary>
+        /// <typeparam name="T">类型</typeparam>
+        public static Type GetTopBaseType<T>()
+        {
+            return GetTopBaseType(typeof(T));
+        }
+
+        /// <summary>
+        /// 获取顶级基类
+        /// </summary>
+        /// <param name="type">类型</param>
+        public static Type GetTopBaseType(Type type)
+        {
+            if (type == null)
+                return null;
+            if (type.IsInterface)
+                return type;
+            if (type.BaseType == typeof(object))
+                return type;
+            return GetTopBaseType(type.BaseType);
+        }
+
+        /// <summary>
+        /// 获取元素类型，如果是集合，返回集合的元素类型
+        /// </summary>
+        /// <param name="type">类型</param>
+        public static Type GetElementType(Type type)
+        {
+            if (IsCollection(type) == false)
+                return type;
+            if (type.IsArray)
+                return type.GetElementType();
+            var genericArgumentsTypes = type.GetTypeInfo().GetGenericArguments();
+            if (genericArgumentsTypes == null || genericArgumentsTypes.Length == 0)
+                throw new ArgumentException("泛型类型参数不能为空");
+            return genericArgumentsTypes[0];
         }
     }
 }

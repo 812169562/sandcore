@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <LangVersion>7.1</LangVersion>
-    <Version>1.1.51</Version>
+    <Version>1.1.52</Version>
     <Authors>yy</Authors>
     <Product>yy</Product>
     <Description>redisaop 缓存bug修复</Description>
@@ -13,8 +13,8 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/812169562/sandcore.git</RepositoryUrl>
     <RepositoryType>C#</RepositoryType>
-    <AssemblyVersion>1.1.51.0</AssemblyVersion>
-    <FileVersion>1.1.51.0</FileVersion>
+    <AssemblyVersion>1.1.52.0</AssemblyVersion>
+    <FileVersion>1.1.52.0</FileVersion>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <NeutralLanguage />
   </PropertyGroup>
