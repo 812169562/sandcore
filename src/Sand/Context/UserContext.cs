@@ -94,6 +94,10 @@ namespace Sand.Context
         /// </summary>
         public string WxOpenId { get; set; }
         /// <summary>
+        /// 用户统一标识。针对一个微信开放平台帐号下的应用，同一用户的unionid是唯一的。
+        /// </summary>
+        public string UnionId { get; set; }
+        /// <summary>
         /// 系统用户角色类型
         /// </summary>
         public SystemUserType Type { get; set; }
@@ -158,6 +162,10 @@ namespace Sand.Context
         /// 微信识别号
         /// </summary>
         public string WxOpenId { get; set; }
+        /// <summary>
+        /// 用户统一标识。针对一个微信开放平台帐号下的应用，同一用户的unionid是唯一的。
+        /// </summary>
+        public string UnionId { get; set; }
         /// <summary>
         /// 系统用户角色类型
         /// </summary>
