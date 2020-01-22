@@ -47,6 +47,10 @@ namespace Sand.Context
         /// </summary>
         string WxOpenId { get; set; }
         /// <summary>
+        /// 用户统一标识。针对一个微信开放平台帐号下的应用，同一用户的unionid是唯一的。
+        /// </summary>
+        string UnionId { get; set; }
+        /// <summary>
         /// 微信识别号
         /// </summary>
         dynamic ThirdData { get; set; }
