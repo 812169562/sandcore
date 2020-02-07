@@ -1,0 +1,535 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Administrator\.nuget\packages\microsoft.net.test.sdk\16.0.1\build\netcoreapp1.0" t="Include">
+      <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
+    </e>
+    <e p="C:\Users\Administrator\.nuget\packages\xunit.runner.visualstudio\2.4.1\build\netcoreapp1.0\xunit.runner.reporters.netcoreapp10.dll" t="Include" />
+    <e p="C:\Users\Administrator\.nuget\packages\xunit.runner.visualstudio\2.4.1\build\netcoreapp1.0\xunit.runner.utility.netcoreapp10.dll" t="Include" />
+    <e p="C:\Users\Administrator\.nuget\packages\xunit.runner.visualstudio\2.4.1\build\netcoreapp1.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
+    <e p="C:\Users\Administrator\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Administrator\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Sand.-1353207033.00" t="ExcludeRecursive" />
+    <e p="F:\Information\Projects\框架\框架\sandcore" t="IncludeFlat">
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Sand.sln" t="IncludeFlat" />
+      <e p="src\Sand" t="IncludeRecursive">
+        <e p="Api" t="Include">
+          <e p="BaseApiController.cs" t="Include" />
+          <e p="Filters" t="Include">
+            <e p="CustomDocument.cs" t="Include" />
+            <e p="CustomDocumentFiliter.cs" t="Include" />
+            <e p="ExceptionHandlerAttribute.cs" t="Include" />
+            <e p="SandAuthorize.cs" t="Include" />
+            <e p="SwaggerOperationFilter.cs" t="Include" />
+          </e>
+          <e p="Models" t="Include">
+            <e p="ApiResult.cs" t="Include" />
+          </e>
+          <e p="OAuth" t="Include">
+            <e p="SandOpenService.cs" t="Include" />
+            <e p="ThirdDto.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Attributes" t="Include">
+          <e p="CodeAttribute.cs" t="Include" />
+          <e p="EventAttribute.cs" t="Include" />
+          <e p="OperationAttribute.cs" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Cache" t="Include">
+          <e p="IRedisCache.cs" t="Include" />
+          <e p="LocalCache.cs" t="Include" />
+          <e p="MapperCache.cs" t="Include" />
+          <e p="MemoryCachingAttribute.cs" t="Include" />
+          <e p="MemoryCachingInterceptor.cs" t="Include" />
+          <e p="RedisCache.cs" t="Include" />
+          <e p="RedisCachingAttribute.cs" t="Include" />
+          <e p="RedisCachingInterceptor.cs" t="Include" />
+        </e>
+        <e p="Cloud" t="Include">
+          <e p="Express" t="Include">
+            <e p="IExpress.cs" t="Include" />
+            <e p="IExpressRequest.cs" t="Include" />
+            <e p="IExpressResponse.cs" t="Include" />
+            <e p="Kdniao" t="Include">
+              <e p="IKdniaoExpress.cs" t="Include" />
+              <e p="KdniaoExpress.cs" t="Include" />
+              <e p="KdniaoOrderQueryRequest.cs" t="Include" />
+              <e p="KdniaoOrderQueryResponse.cs" t="Include" />
+              <e p="KdniaoOrderTraceRequest.cs" t="Include" />
+              <e p="KdniaoRequest.cs" t="Include" />
+              <e p="KdniaoResponse.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Tencent" t="Include">
+            <e p="Ocr" t="Include">
+              <e p="IdCard.cs" t="Include" />
+              <e p="InputParm.cs" t="Include" />
+              <e p="IOCR.cs" t="Include" />
+              <e p="OCR.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Configuration" t="Include">
+          <e p="ConfigurationExtention.cs" t="Include" />
+        </e>
+        <e p="Context" t="Include">
+          <e p="IContext.cs" t="Include" />
+          <e p="UserContext.cs" t="Include" />
+          <e p="WebContext.cs" t="Include" />
+        </e>
+        <e p="Data" t="Include">
+          <e p="BaseEntityMap.cs" t="Include" />
+          <e p="Check.cs" t="Include" />
+          <e p="DbAccess.cs" t="Include" />
+          <e p="IMapRegister.cs" t="Include" />
+        </e>
+        <e p="Dependency" t="Include">
+          <e p="DefaultContainer.cs" t="Include" />
+          <e p="IConfig.cs" t="Include" />
+          <e p="IContainer.cs" t="Include" />
+          <e p="IDependency.cs" t="Include" />
+          <e p="IScope.cs" t="Include" />
+          <e p="ISoftDelete.cs" t="Include" />
+          <e p="IVersion.cs" t="Include" />
+          <e p="LifetimeStyle.cs" t="Include" />
+          <e p="Scope.cs" t="Include" />
+        </e>
+        <e p="DI" t="Include">
+          <e p="AppDomainAllAssemblyFinder.cs" t="Include" />
+          <e p="AspectCoreInterceptorAutofacExtensions.cs" t="Include" />
+          <e p="DefaultIocConfig.cs" t="Include" />
+          <e p="IocConfig.cs" t="Include" />
+        </e>
+        <e p="Domain" t="Include">
+          <e p="Entities" t="Include">
+            <e p="IEntity.cs" t="Include" />
+          </e>
+          <e p="Events" t="Include" />
+          <e p="Query" t="Include">
+            <e p="IPager.cs" t="Include" />
+            <e p="IQuery.cs" t="Include" />
+            <e p="OrderByBuilder.cs" t="Include" />
+            <e p="OrderByItem.cs" t="Include" />
+          </e>
+          <e p="Repositories" t="Include">
+            <e p="BaseRepository.cs" t="Include" />
+            <e p="EfRepository.cs" t="Include" />
+            <e p="IRepository.cs" t="Include" />
+          </e>
+          <e p="Services" t="Include" />
+          <e p="Uow" t="Include">
+            <e p="DataFilters.cs" t="Include" />
+            <e p="EfLoggerProvider.cs" t="Include" />
+            <e p="EfUnitOfWork.cs" t="Include" />
+            <e p="ISqlConfig.cs" t="Include" />
+            <e p="IUnitOfWork.cs" t="Include" />
+            <e p="MsSqlConfig.cs" t="Include" />
+            <e p="MySqlConfig.cs" t="Include" />
+          </e>
+        </e>
+        <e p="EntityFramework" t="Include">
+          <e p="EF" t="Include">
+            <e p="DbContext" t="Include">
+              <e p="DbContext.GetDbSetProperties.cs" t="Include" />
+              <e p="DbContext.MapReader.cs" t="Include" />
+            </e>
+            <e p="DbParameter" t="Include">
+              <e p="DbParameter.CopyFrom.cs" t="Include" />
+            </e>
+            <e p="IQueryable`" t="Include">
+              <e p="IQueryable.Order.cs" t="Include" />
+              <e p="IQueryable.OrderBy.cs" t="Include" />
+              <e p="IQueryable.OrderByDescending.cs" t="Include" />
+              <e p="IQueryable.ThenBy.cs" t="Include" />
+              <e p="IQueryable.ThenByDescending.cs" t="Include" />
+            </e>
+            <e p="Object" t="Include">
+              <e p="Object.NullIfDbNull.cs" t="Include" />
+            </e>
+            <e p="Type" t="Include">
+              <e p="Type.GetDbSetElementType.cs" t="Include" />
+              <e p="Type.GetField.cs" t="Include" />
+            </e>
+          </e>
+          <e p="EFCore" t="Include">
+            <e p="CreateEntity" t="Include">
+              <e p="CreateEntityCommand.cs" t="Include" />
+              <e p="CreateEntityConnection.cs" t="Include" />
+              <e p="CreateEntityDataReader.cs" t="Include" />
+              <e p="CreateEntityRelationalConnection.cs" t="Include" />
+            </e>
+            <e p="DbContext" t="Include">
+              <e p="CreateStoreCommand.cs" t="Include" />
+              <e p="DbContext.GetKeyNames.cs" t="Include" />
+              <e p="DbContext.IsEFCore2x.cs" t="Include" />
+            </e>
+            <e p="DbSet`" t="Include">
+              <e p="GetDbContext.cs" t="Include" />
+            </e>
+            <e p="GetStateManager.cs" t="Include" />
+            <e p="IQueryable`" t="Include">
+              <e p="CreateCommand.cs" t="Include" />
+              <e p="GetDbContext.cs" t="Include" />
+              <e p="GetInMemoryContext.cs" t="Include" />
+              <e p="IQueryable`.GetCommand.cs" t="Include" />
+              <e p="IsInMemoryQueryContext.cs" t="Include" />
+            </e>
+            <e p="Type" t="Include">
+              <e p="GetTypeFromAssembly_Core.cs" t="Include" />
+            </e>
+          </e>
+          <e p="ExceptionMessage.cs" t="Include" />
+          <e p="Shared" t="Include">
+            <e p="Dictionary" t="Include">
+              <e p="Dictionary.AddOrAppend.cs" t="Include" />
+            </e>
+            <e p="DynamicAnonymousType" t="Include">
+              <e p="DynamicAnonymousType.cs" t="Include" />
+            </e>
+            <e p="LazyAsyncEnumerator" t="Include">
+              <e p="LazyAsyncEnumerator.cs" t="Include" />
+            </e>
+            <e p="LinqExpressionExtensions" t="Include">
+              <e p="_Internal" t="Include">
+                <e p="ExpressionExtensions.cs" t="Include" />
+              </e>
+              <e p="LambdaExpression" t="Include">
+                <e p="LambdaExpression.GetPropertyOrFieldAccessor.cs" t="Include" />
+                <e p="LambdaExpression.GetPropertyOrFieldAccessors.cs" t="Include" />
+              </e>
+              <e p="PropertyOrFieldAccessor.cs" t="Include" />
+            </e>
+            <e p="Model" t="Include">
+              <e p="DbContext.GetModel.cs" t="Include" />
+              <e p="Extensions" t="Include">
+                <e p="Dictionary.GetValueOrNull.cs" t="Include" />
+                <e p="GetTableDefinitions.cs" t="Include" />
+                <e p="Object.To.cs" t="Include" />
+                <e p="String" t="Include">
+                  <e p="String.DeserializeXml.cs" t="Include" />
+                  <e p="String.SubstringLastIndexOf.cs" t="Include" />
+                </e>
+                <e p="XElement" t="Include">
+                  <e p="XElement.RemoveAllNamespaces.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Infrastructure" t="Include">
+                <e p="DbModelPlus.cs" t="Include" />
+              </e>
+              <e p="Mapping" t="Include">
+                <e p="ComplexPropertyMapping.cs" t="Include" />
+                <e p="ConditionPropertyMapping.cs" t="Include" />
+                <e p="EntityContainerMapping.cs" t="Include" />
+                <e p="EntitySetMapping.cs" t="Include" />
+                <e p="EntityTypeMapping.cs" t="Include" />
+                <e p="MappingFragment.cs" t="Include" />
+                <e p="ScalarAccessorMapping.cs" t="Include" />
+                <e p="ScalarPropertyMapping.cs" t="Include" />
+                <e p="SchemaMapping.cs" t="Include" />
+              </e>
+              <e p="Model" t="Include">
+                <e p="Model.BuildMapping.cs" t="Include" />
+                <e p="Model.BuildSchema.cs" t="Include" />
+                <e p="Model.GetCodeFirstModel.cs" t="Include" />
+                <e p="Model.GetConceptualModelString.cs" t="Include" />
+                <e p="Model.GetDatabaseFirst.cs" t="Include" />
+                <e p="Model.GetMappingModelString.cs" t="Include" />
+                <e p="Model.GetModelName.cs" t="Include" />
+                <e p="Model.GetModelNames.cs" t="Include" />
+                <e p="Model.GetModelXDocument.cs" t="Include" />
+                <e p="Model.GetStorageModelString.cs" t="Include" />
+                <e p="Model.SchemaAddIndex.cs" t="Include" />
+              </e>
+              <e p="SchemaObjectModel" t="Include">
+                <e p="EntityContainer.cs" t="Include" />
+                <e p="EntityContainerEntitySet.cs" t="Include" />
+                <e p="EntityKeyElement.cs" t="Include" />
+                <e p="Property.cs" t="Include" />
+                <e p="PropertyRefElement.cs" t="Include" />
+                <e p="Schema.cs" t="Include" />
+                <e p="SchemaEntityType.cs" t="Include" />
+                <e p="SchemaEntityType_Generic.cs" t="Include" />
+                <e p="SchemaEnumMember.cs" t="Include" />
+                <e p="SchemaEnumType.cs" t="Include" />
+              </e>
+              <e p="TableDefinition.cs" t="Include" />
+              <e p="Utility" t="Include">
+                <e p="CreateGetFunc.cs" t="Include" />
+                <e p="CreateSetFunc.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Visitor" t="Include">
+              <e p="ExpressionVisitor.cs" t="Include" />
+            </e>
+          </e>
+          <e p="UpdatePlus" t="Include">
+            <e p="BatchUpdate.cs" t="Include" />
+            <e p="BatchUpdateManager.cs" t="Include" />
+            <e p="BatchUpdateTableDefinition.cs" t="Include" />
+            <e p="BatchUpdateVisitor.cs" t="Include" />
+            <e p="Extensions" t="Include">
+              <e p="Update.cs" t="Include" />
+              <e p="UpdateAsync.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Events" t="Include">
+          <e p="Default" t="Include">
+            <e p="EventHandlerExecutionContext.cs" t="Include" />
+            <e p="EventQueue.cs" t="Include" />
+            <e p="PassThroughEventBus.cs" t="Include" />
+          </e>
+          <e p="EventExtension.cs" t="Include" />
+          <e p="EventHandler.cs" t="Include" />
+          <e p="EventProcessedEventArgs.cs" t="Include" />
+          <e p="IEvent.cs" t="Include" />
+          <e p="IEventBus.cs" t="Include" />
+          <e p="IEventHandler.cs" t="Include" />
+          <e p="IEventHandlerExecutionContext.cs" t="Include" />
+          <e p="IEventPublisher.cs" t="Include" />
+          <e p="IEventStore.cs" t="Include" />
+          <e p="IEventSubscriber.cs" t="Include" />
+          <e p="Utils.cs" t="Include" />
+        </e>
+        <e p="Exceptions" t="Include">
+          <e p="SandException.cs" t="Include" />
+        </e>
+        <e p="Expressions" t="Include">
+          <e p="DataType.cs" t="Include" />
+          <e p="ExpressionBuilder.cs" t="Include" />
+          <e p="ExpressionInfo.cs" t="Include" />
+          <e p="ExpressionInfoResolver.cs" t="Include" />
+          <e p="Operator.cs" t="Include" />
+          <e p="ParameterRebinder.cs" t="Include" />
+        </e>
+        <e p="Extension" t="Include">
+          <e p="00-Extensions.Format.cs" t="Include" />
+          <e p="00-Extensions.Helper.cs" t="Include" />
+          <e p="00-Extensions.Nullable.cs" t="Include" />
+          <e p="00-Extensions.Validate.cs" t="Include" />
+          <e p="00-Extensions.ValidationAttribute.cs" t="Include" />
+          <e p="CollectionExtensions.cs" t="Include" />
+          <e p="ComparableExtensions.cs" t="Include" />
+          <e p="DataAnnotationValidation.cs" t="Include" />
+          <e p="DateTimeExtensions.cs" t="Include" />
+          <e p="DayOfWeekExtensions.cs" t="Include" />
+          <e p="EventHandlerExtensions.cs" t="Include" />
+          <e p="ExceptionExtensions.cs" t="Include" />
+          <e p="Extensions.Convert.cs" t="Include" />
+          <e p="Extensions.Expression.cs" t="Include" />
+          <e p="Extensions.String.cs" t="Include" />
+          <e p="FilterExtension.cs" t="Include" />
+          <e p="Item.cs" t="Include" />
+          <e p="LockExtensions.cs" t="Include" />
+          <e p="ObjectExtensions.cs" t="Include" />
+          <e p="ParamterCheckExtensions.cs" t="Include" />
+          <e p="SqlExetension.cs" t="Include" />
+          <e p="WhereIfExtension.cs" t="Include" />
+        </e>
+        <e p="Filter" t="Include">
+          <e p="LocalCacheAttribute.cs" t="Include" />
+          <e p="LogInterceptorAttribute.cs" t="Include" />
+          <e p="TraceLogAttribute.cs" t="Include" />
+          <e p="UnitOfWorkAttribute.cs" t="Include" />
+        </e>
+        <e p="Finders" t="Include">
+          <e p="FinderBase.cs" t="Include" />
+          <e p="IFinder.cs" t="Include" />
+        </e>
+        <e p="GlobalSuppressions.cs" t="Include" />
+        <e p="Helpers" t="Include">
+          <e p="Common.cs" t="Include" />
+          <e p="Const.cs" t="Include" />
+          <e p="Convert.cs" t="Include" />
+          <e p="Encrypt.cs" t="Include" />
+          <e p="File.cs" t="Include" />
+          <e p="Guid.cs" t="Include" />
+          <e p="IdsUrl.cs" t="Include" />
+          <e p="Internal" t="Include">
+            <e p="ObjectId.cs" t="Include" />
+            <e p="RsaHelper.cs" t="Include" />
+          </e>
+          <e p="Json.cs" t="Include" />
+          <e p="Lambda.cs" t="Include" />
+          <e p="Reflection.cs" t="Include" />
+          <e p="Regex.cs" t="Include" />
+          <e p="ResourceHelper.cs" t="Include" />
+          <e p="Snowflake.cs" t="Include" />
+          <e p="SqlHelper.cs" t="Include" />
+          <e p="String.Builder.cs" t="Include" />
+          <e p="String.Tools.cs" t="Include" />
+          <e p="Url.cs" t="Include" />
+          <e p="Web.cs" t="Include" />
+          <e p="Xml.cs" t="Include" />
+        </e>
+        <e p="Lambdas" t="Include">
+          <e p="Dynamics" t="Include">
+            <e p="ClassFactory.cs" t="Include" />
+            <e p="DynamicClass.cs" t="Include" />
+            <e p="DynamicExpression.cs" t="Include" />
+            <e p="DynamicOrdering.cs" t="Include" />
+            <e p="DynamicProperty.cs" t="Include" />
+            <e p="DynamicQueryable.cs" t="Include" />
+            <e p="ExpressionParser.cs" t="Include" />
+            <e p="ParseException.cs" t="Include" />
+            <e p="Res.cs" t="Include" />
+            <e p="Signature.cs" t="Include" />
+          </e>
+          <e p="ExpressionBuilder.cs" t="Include" />
+          <e p="Lambda.cs" t="Include" />
+          <e p="ParameterRebinder.cs" t="Include" />
+        </e>
+        <e p="Log" t="Include">
+          <e p="Abstractions" t="Include">
+            <e p="ICaption.cs" t="Include" />
+            <e p="ILogContent.cs" t="Include" />
+            <e p="ILogContext.cs" t="Include" />
+            <e p="ILogConvert.cs" t="Include" />
+            <e p="ILogFormat.cs" t="Include" />
+            <e p="ILogProviderFactory.cs" t="Include" />
+          </e>
+          <e p="Core" t="Include">
+            <e p="ContentFormat.cs" t="Include" />
+            <e p="ExceptionlessContent.cs" t="Include" />
+            <e p="ExceptionlessLogContext.cs" t="Include" />
+            <e p="FormatProvider.cs" t="Include" />
+            <e p="LogBase.cs" t="Include" />
+            <e p="LogContent.cs" t="Include" />
+            <e p="LogContext.cs" t="Include" />
+            <e p="LogContextInfo.cs" t="Include" />
+            <e p="NullLogContext.cs" t="Include" />
+            <e p="NullLogFormat.cs" t="Include" />
+            <e p="NullLogger.cs" t="Include" />
+          </e>
+          <e p="Extension" t="Include">
+            <e p="Extensions.Log.cs" t="Include" />
+            <e p="Extensions.LogContent.cs" t="Include" />
+            <e p="Extensions.Service.cs" t="Include" />
+          </e>
+          <e p="Factory" t="Include">
+            <e p="ExceptionlessProviderFactory.cs" t="Include" />
+            <e p="NLogProviderFactory.cs" t="Include" />
+          </e>
+          <e p="ILog.cs" t="Include" />
+          <e p="Less" t="Include">
+            <e p="ExceptionlessLog.cs" t="Include" />
+            <e p="ExceptionlessLogExtensions.cs" t="Include" />
+          </e>
+          <e p="Log.cs" t="Include" />
+          <e p="LogResource.cs" t="Include" />
+          <e p="NullLog.cs" t="Include" />
+          <e p="Provider" t="Include">
+            <e p="ExceptionlessProvider.cs" t="Include" />
+            <e p="ILogProvider.cs" t="Include" />
+            <e p="NLogProvider.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Maps" t="Include">
+          <e p="Extensions.Mapper.cs" t="Include" />
+          <e p="MapAttribute.cs" t="Include" />
+        </e>
+        <e p="Mongo" t="Include">
+          <e p="Attributes" t="Include">
+            <e p="BaseDataName.cs" t="Include" />
+            <e p="CollectionName.cs" t="Include" />
+            <e p="ConnectionName.cs" t="Include" />
+          </e>
+          <e p="IMongoEntity.cs" t="Include" />
+          <e p="IMongoService.cs" t="Include" />
+          <e p="MongoDatabase.cs" t="Include" />
+          <e p="MongoEntity.cs" t="Include" />
+          <e p="MongoService.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.2" t="Include">
+              <e p="Sand.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Parameters" t="Include">
+          <e p="Formats" t="Include">
+            <e p="IParameterFormat.cs" t="Include" />
+            <e p="ParameterFormatBase.cs" t="Include" />
+            <e p="UrlParameterFormat.cs" t="Include" />
+          </e>
+          <e p="IParameterManager.cs" t="Include" />
+          <e p="ParameterBuilder.cs" t="Include" />
+          <e p="UrlParameterBuilder.cs" t="Include" />
+        </e>
+        <e p="Resources.Designer.cs" t="Include" />
+        <e p="Resources.resx" t="Include" />
+        <e p="Result" t="Include">
+          <e p="Paged.cs" t="Include" />
+          <e p="ResultData.cs" t="Include" />
+          <e p="ResultFile.cs" t="Include" />
+        </e>
+        <e p="Sand.csproj" t="IncludeRecursive" />
+        <e p="Service" t="Include">
+          <e p="BaseDto.cs" t="Include" />
+          <e p="IService.cs" t="Include" />
+          <e p="Service.cs" t="Include" />
+        </e>
+        <e p="Signatures" t="Include">
+          <e p="ISignKey.cs" t="Include" />
+          <e p="ISignManager.cs" t="Include" />
+          <e p="SignKey.cs" t="Include" />
+          <e p="SignManager.cs" t="Include" />
+        </e>
+        <e p="Utils" t="Include">
+          <e p="Enums" t="Include">
+            <e p="CommEnums.cs" t="Include" />
+            <e p="EnumKeyValue.cs" t="Include" />
+          </e>
+          <e p="Tree" t="Include">
+            <e p="ITreeView.cs" t="Include" />
+            <e p="TreeView.cs" t="Include" />
+            <e p="TreeViewExend.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="src\Sand.Test" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="HelperTest.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.2" t="Include">
+              <e p="Sand.Test.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Sand.Test.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="WebApplication1" t="IncludeRecursive">
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Controllers" t="Include">
+          <e p="Class.cs" t="Include" />
+          <e p="MongoTest.cs" t="Include" />
+          <e p="OrderMap.cs" t="Include" />
+          <e p="ValuesController.cs" t="Include" />
+        </e>
+        <e p="Events" t="Include">
+          <e p="WechatNoticeEvent.cs" t="Include" />
+        </e>
+        <e p="nlog.config" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.2" t="Include">
+              <e p="WebApplication1.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Startup.cs" t="Include" />
+        <e p="WebApplication1.csproj" t="IncludeRecursive" />
+        <e p="WebApplication1.xml" t="Include" />
+      </e>
+    </e>
+  </component>
+</project>

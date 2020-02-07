@@ -3,18 +3,18 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <LangVersion>7.1</LangVersion>
-    <Version>1.1.52</Version>
+    <Version>1.1.55</Version>
     <Authors>yy</Authors>
     <Product>yy</Product>
-    <Description>redisaop 缓存bug修复</Description>
+    <Description>新增腾讯云身份证识别</Description>
     <Copyright>MIT</Copyright>
     <PackageLicenseUrl>https://github.com/812169562/sandcore/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/812169562/sandcore.git</PackageProjectUrl>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/812169562/sandcore.git</RepositoryUrl>
     <RepositoryType>C#</RepositoryType>
-    <AssemblyVersion>1.1.52.0</AssemblyVersion>
-    <FileVersion>1.1.52.0</FileVersion>
+    <AssemblyVersion>1.1.55.0</AssemblyVersion>
+    <FileVersion>1.1.55.0</FileVersion>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <NeutralLanguage />
   </PropertyGroup>
@@ -102,7 +102,7 @@
     <PackageReference Include="StaticDotNet.EntityFrameworkCore.ModelConfiguration" Version="1.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="4.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="4.0.1" />
-    <PackageReference Include="TencentCloudSDK" Version="3.0.39" />
+    <PackageReference Include="TencentCloudSDK" Version="3.0.44" />
   </ItemGroup>
 
   <ItemGroup>

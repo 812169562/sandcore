@@ -1,9 +1,18 @@
 ﻿using System.Threading.Tasks;
+using Sand.Dependency;
 
-namespace Sand.Cloud.Tencent
+namespace  Sand.Cloud.Tencent.Ocr
 {
-    public interface IOCR
+    /// <summary>
+    /// 图像识别
+    /// </summary>
+    public interface IOCR:IDependency
     {
-        Task<IdCard> GetIdCard();
+        /// <summary>
+        /// 身份证识别
+        /// </summary>
+        /// <param name="inputParm">输入参数</param>
+        /// <returns></returns>
+        Task<IdCard> GetIdCard(InputParm inputParm);
     }
 }
