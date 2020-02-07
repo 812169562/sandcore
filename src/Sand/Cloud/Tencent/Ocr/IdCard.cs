@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sand.Tencent.Tencentcloud
+namespace Sand.Cloud.Tencent
 {
     /// <summary>
     /// 身份证识别
     /// </summary>
-    public interface  IIdCard
+    public class  IdCard
     {
     }
 }
