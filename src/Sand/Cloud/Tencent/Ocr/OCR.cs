@@ -28,8 +28,8 @@ namespace Sand.Cloud.Tencent.Ocr
         {
             var credential = new Credential();
             var config=Ioc.GetService<IConfiguration>();
-            credential.SecretId = config.GetSection("Tencent:SecretId").Value??"AKIDResEl6RSeZEeqjrxYbNvDH7g8qJWMBfk";
-            credential.SecretKey = config.GetSection("Tencent:SecretKey").Value ?? "7svkJbdSjom2D7kU1Wn1f3EAsNccN3b4";
+            credential.SecretId = config.GetSection("Tencent:SecretId").Value??"";
+            credential.SecretKey = config.GetSection("Tencent:SecretKey").Value ?? "";
             ClientProfile clientProfile = new ClientProfile();
             HttpProfile httpProfile = new HttpProfile();
             httpProfile.Endpoint = ("ocr.tencentcloudapi.com");
