@@ -25,7 +25,6 @@ namespace Sand.Attributes
         /// <param name="name">名称</param>
         public CodeAttribute(string code, string name="")
         {
-
         }
     }
 }
