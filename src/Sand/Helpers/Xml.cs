@@ -8,8 +8,14 @@ using System.Xml.Serialization;
 
 namespace Sand.Helpers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Xml
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public static Hashtable m_XmlSerializerList = new Hashtable();
 
         #region 将一个对象转换为XML
@@ -17,7 +23,6 @@ namespace Sand.Helpers
         /// 将一个对象转换为XML
         /// </summary>
         /// <param name="o">对象</param>
-        /// <param name="type">对象的类型</param>
         /// <returns>XML字符串</returns>
         public static string ObjectToXml<T>(object o)
         {
@@ -55,7 +60,6 @@ namespace Sand.Helpers
         /// 将一个XML字符串转换为一个对象
         /// </summary>
         /// <param name="strXml">XML字符串</param>
-        /// <param name="type">对象类型</param>
         /// <returns>结果对象</returns>
         public static T XmlToObject<T>(string strXml)
         {

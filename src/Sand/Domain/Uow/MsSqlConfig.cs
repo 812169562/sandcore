@@ -23,6 +23,12 @@ namespace Sand.Domain.Uow
         /// 数据库连接
         /// </summary>
         public string SqlConnectionString { get => _configuration.GetConnectionString("DefaultConnection"); }
+
+        /// <summary>
+        /// 读取连接字符串
+        /// </summary>
+
+        public string ReadSqlConnectionString { get => _configuration.GetConnectionString("ReadConnection"); }
         /// <summary>
         /// 
         /// </summary>

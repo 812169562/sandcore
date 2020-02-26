@@ -10,6 +10,8 @@ using Sand.Domain.Uow;
 using Sand.DI;
 using Autofac;
 using Microsoft.EntityFrameworkCore;
+using Sand.Utils.Enums;
+using Sand.Extensions;
 
 namespace Sand.Domain.Repositories
 {
@@ -25,16 +27,35 @@ namespace Sand.Domain.Repositories
         /// </summary>
         public virtual DbSet<TEntity> Table { get; }
         /// <summary>
+        /// 读取数据集合实体集
+        /// </summary>
+        public virtual DbSet<TEntity> ReadTable { get; }
+        /// <summary>
+        /// 写入数据库上下文(当单数据库时读写共用)
+        /// </summary>
+        protected IWriteUnitOfWork WriteUow { get; set; }
+        /// <summary>
         /// 工作单元
         /// </summary>
-        protected IUnitOfWork Uow { get; set; }
+        protected IReadUnitOfWork ReadUow { get; set; }
+        /// <summary>
+        /// 数据模式(读写分离还是单库)
+        /// </summary>
+        protected DbMode DbMode {get;set;}
         /// <summary>
         /// 基础仓储
         /// </summary>
-        /// <param name="unitOfWork"></param>
-        protected BaseRepository(IUnitOfWork unitOfWork)
+        protected BaseRepository()
         {
-            Uow = unitOfWork;
+            var sqlConfig = Ioc.GetService<ISqlConfig>();
+            if (sqlConfig.ReadSqlConnectionString.IsEmpty())
+            {
+                DbMode = DbMode.Single;
+            }
+            else
+            {
+                DbMode = DbMode.Separate;
+            }
             UserContext = Ioc.GetService<IUserContext>();
         }
 

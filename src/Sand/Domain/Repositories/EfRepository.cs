@@ -14,6 +14,7 @@ using Sand.EntityFramework.UpdatePlus;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Sand.Helpers;
 using Sand.Context;
+using Sand.DI;
 
 namespace Sand.Domain.Repositories
 {
@@ -27,18 +28,26 @@ namespace Sand.Domain.Repositories
         /// <summary>
         /// 实体集
         /// </summary>
-        public override DbSet<TEntity> Table { get { return Uow.Set<TEntity>(); } }
+        public override DbSet<TEntity> Table { get { return WriteUow.Set<TEntity>(); } }
+        /// <summary>
+        /// 读取数据集合实体集
+        /// </summary>
+        public override DbSet<TEntity> ReadTable { get { if (DbMode == Utils.Enums.DbMode.Single) return Table; return ReadUow.Set<TEntity>(); } }
         /// <summary>
         /// 工作单元
         /// </summary>
-        protected new IUnitOfWork Uow { get; set; }
+        protected new IWriteUnitOfWork WriteUow { get; set; }
+        /// <summary>
+        /// 读数据工作单元
+        /// </summary>
+        protected new IReadUnitOfWork ReadUow { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="uow"></param>
-        public EfRepository(IUnitOfWork uow) : base(uow)
+        public EfRepository()
         {
-            Uow = base.Uow;
+            WriteUow = Ioc.GetService<IWriteUnitOfWork>();
+            ReadUow = DbMode == Utils.Enums.DbMode.Single ? null : Ioc.GetService<IReadUnitOfWork>();
         }
         /// <summary>
         /// 附加
@@ -46,10 +55,7 @@ namespace Sand.Domain.Repositories
         /// <param name="entity"></param>
         protected virtual EntityEntry<TEntity> AttachIfNot(TEntity entity)
         {
-            //if (!Table.Local.Contains(entity))
-            //{
             return Table.Attach(entity);
-            //}
         }
         /// <summary>
         /// 创建数据
@@ -127,7 +133,7 @@ namespace Sand.Domain.Repositories
         /// </summary>
         public IQueryable<TEntity> FindAsNoTracking()
         {
-            return Table.AsNoTracking();
+            return ReadTable.AsNoTracking();
         }
 
         /// <summary>
@@ -136,7 +142,7 @@ namespace Sand.Domain.Repositories
         /// <returns></returns>
         public override IQueryable<TEntity> Retrieve()
         {
-            return Table;
+            return ReadTable;
         }
         /// <summary>
         /// 查询数据
@@ -145,7 +151,7 @@ namespace Sand.Domain.Repositories
         /// <returns></returns>
         public override IQueryable<TEntity> Retrieve(Expression<Func<TEntity, bool>> predicate)
         {
-            return Table.Where(predicate);
+            return ReadTable.Where(predicate);
         }
         /// <summary>
         /// 根据编号查询数据
@@ -163,7 +169,7 @@ namespace Sand.Domain.Repositories
         /// <returns></returns>
         public override IList<TEntity> RetrieveByIds(IList<TPrimaryKey> ids)
         {
-            return Table.Where(t => ids.Contains(t.Id)).ToList();
+            return ReadTable.Where(t => ids.Contains(t.Id)).ToList();
         }
 
         #region 更新
@@ -176,7 +182,7 @@ namespace Sand.Domain.Repositories
         {
             if (entity == null)
                 throw new Warning("操作错误:保存的对象已经不存在");
-            Uow.Entry(entity).State = EntityState.Detached;
+            WriteUow.Entry(entity).State = EntityState.Detached;
             var old = this.RetrieveById(entity.Id);
             if (old.Version != entity.Version)
             {
@@ -185,7 +191,7 @@ namespace Sand.Domain.Repositories
                 if (old.Version != entity.Version)
                     throw new Warning("当前操作数据不是最新数据,请重新刷新页面再操作！");
             }
-            var oldEntry = Uow.Entry(old);
+            var oldEntry = WriteUow.Entry(old);
             oldEntry.State = EntityState.Detached;
             oldEntry.CurrentValues[nameof(entity.Version)] = entity.Version;
             oldEntry = Table.Attach(old);
@@ -208,7 +214,7 @@ namespace Sand.Domain.Repositories
         {
             if (entity == null)
                 throw new Warning("操作错误:保存的对象已经不存在");
-            Uow.Entry(entity).State = EntityState.Detached;
+            WriteUow.Entry(entity).State = EntityState.Detached;
             var old = await this.RetrieveByIdAsync(entity.Id);
             if (old.Version != entity.Version)
             {
@@ -217,7 +223,7 @@ namespace Sand.Domain.Repositories
                 if (old.Version != entity.Version)
                     throw new Warning("当前操作数据不是最新数据,请重新刷新页面再操作！");
             }
-            var oldEntry = Uow.Entry(old);
+            var oldEntry = WriteUow.Entry(old);
             oldEntry.State = EntityState.Detached;
             oldEntry.CurrentValues[nameof(entity.Version)] = entity.Version;
             oldEntry = Table.Attach(old);
@@ -340,7 +346,7 @@ namespace Sand.Domain.Repositories
         /// <returns></returns>
         public override int Count(Expression<Func<TEntity, bool>> predicate)
         {
-            return Table.Where(predicate).Count();
+            return ReadTable.Where(predicate).Count();
         }
         /// <summary>
         /// 查询数据条数
@@ -349,7 +355,7 @@ namespace Sand.Domain.Repositories
         /// <returns></returns>
         public override Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return Table.Where(predicate).CountAsync();
+            return ReadTable.Where(predicate).CountAsync();
         }
         /// <summary>
         /// 删除指定数据
@@ -396,7 +402,7 @@ namespace Sand.Domain.Repositories
         /// <returns></returns>
         public override IList<TEntity> RetrieveAll()
         {
-            return Table.Where(t => true).ToList();
+            return ReadTable.Where(t => true).ToList();
         }
     }
     /// <summary>
@@ -408,8 +414,7 @@ namespace Sand.Domain.Repositories
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="uow"></param>
-        public EfRepository(IUnitOfWork uow) : base(uow)
+        public EfRepository()
         {
         }
     }

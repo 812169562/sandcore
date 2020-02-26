@@ -23,7 +23,7 @@ namespace Sand.Domain.Uow
     /// <summary>
     /// ef工作单元
     /// </summary>
-    public class EfUnitOfWork : DbContext, IUnitOfWork
+    public class WriteUnitOfWork : DbContext, IWriteUnitOfWork
     {
         private readonly ILog _log;
         private readonly ISqlConfig _sqlConfig;
@@ -31,7 +31,7 @@ namespace Sand.Domain.Uow
         /// ef工作单元
         /// </summary>
         /// <param name="sqlConfig">sql配置</param>
-        public EfUnitOfWork(ISqlConfig sqlConfig)
+        public WriteUnitOfWork(ISqlConfig sqlConfig)
         {
             _log = Log.Log.GetLog("EfTraceLog");
             _sqlConfig = sqlConfig;
@@ -44,9 +44,8 @@ namespace Sand.Domain.Uow
         /// 连接
         /// </summary>
         /// <param name="connectionString"></param>
-        public EfUnitOfWork(string connectionString)
+        public WriteUnitOfWork(string connectionString)
         {
-            //ConnectionString = connectionString;
         }
         /// <summary>
         /// 跟踪号
@@ -74,7 +73,6 @@ namespace Sand.Domain.Uow
         /// </summary>
         public void RollBack()
         {
-            //this.RollBack();
         }
 
         /// <summary>
@@ -101,8 +99,6 @@ namespace Sand.Domain.Uow
             foreach (IMapRegister mapper in GetMaps())
                 mapper.Register(modelBuilder);
         }
-        //public static readonly LoggerFactory MyLoggerFactory = new LoggerFactory(new[] { new EfLoggerProvider(_log, this) });
-
         /// <summary>
         /// Configure context options<br/>
         /// 配置上下文选项<br/>
@@ -121,11 +117,8 @@ namespace Sand.Domain.Uow
                 {
                     optionsBuilder.UseMySql(ConnectionString);
                 }
-                //var s = @"Data Source=DESKTOP-9G02PJO\MSSQLSERVER3;database=IdentityServer4.EntityFramework-2.0.0;user=sa;password=sa;";
                 optionsBuilder.EnableSensitiveDataLogging();
-                //optionsBuilder.UseInMemoryDatabase();
                 BatchUpdateManager.InMemoryDbContextFactory = () => this;
-                //optionsBuilder.UseLoggerFactory(MyLoggerFactory);
                 optionsBuilder.UseLoggerFactory(new LoggerFactory(new[] { new EfLoggerProvider(_log, this) }));
             }
             catch (Exception ex)

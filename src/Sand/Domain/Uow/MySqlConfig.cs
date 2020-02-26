@@ -24,6 +24,12 @@ namespace Sand.Domain.Uow
         /// </summary>
         public string SqlConnectionString { get => _configuration.GetConnectionString("DefaultConnection"); }
         /// <summary>
+        /// 读取连接字符串
+        /// </summary>
+
+        public string ReadSqlConnectionString { get => _configuration.GetConnectionString("ReadConnection"); }
+
+        /// <summary>
         /// 
         /// </summary>
         public DbType DbType { get => DbType.Mysql; }

@@ -1,8 +1,13 @@
 ﻿namespace Sand.Cloud.Tencent.Ocr
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class InputParm
     {
-
+        /// <summary>
+        /// 
+        /// </summary>
         public InputParm()
         {
             CardSide = "FRONT";

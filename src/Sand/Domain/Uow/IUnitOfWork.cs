@@ -12,7 +12,7 @@ namespace Sand.Domain.Uow
     /// <summary>
     /// 工作单元
     /// </summary>
-    public interface IUnitOfWork : IDisposable, IDependency
+    public interface IUnitOfWork : IDisposable
     {
         /// <summary>
         /// 跟踪号

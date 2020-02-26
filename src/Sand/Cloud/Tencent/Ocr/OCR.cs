@@ -14,6 +14,9 @@ using TencentCloud.Ocr.V20181119.Models;
 
 namespace Sand.Cloud.Tencent.Ocr
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class OCR : IOCR
     {
         /// <summary>

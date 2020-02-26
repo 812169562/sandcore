@@ -68,7 +68,10 @@ namespace Microsoft.Extensions.Configuration
         {
             _source = source;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="stream"></param>
         public override void Load(Stream stream)
         {
             try

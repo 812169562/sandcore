@@ -131,7 +131,7 @@ namespace Sand.Domain.Query
         /// <summary>
         /// 查询条件
         /// </summary>
-        private Expression<Func<TEntity, bool>> _predicate;
+        private Expression<Func<TEntity, bool>> _predicate=null;
         /// <summary>
         /// 查询数据
         /// </summary>

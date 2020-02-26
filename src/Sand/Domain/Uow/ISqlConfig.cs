@@ -8,12 +8,17 @@ namespace Sand.Domain.Uow
     /// <summary>
     /// 数据库配置
     /// </summary>
-    public interface ISqlConfig: IDependencySingleton
+    public interface ISqlConfig : IDependencySingleton
     {
         /// <summary>
         /// 链接字符串
         /// </summary>
         string SqlConnectionString { get; }
+
+        /// <summary>
+        /// 读取连接字符串
+        /// </summary>
+        string ReadSqlConnectionString { get; }
         /// <summary>
         /// 数据库类型
         /// </summary>

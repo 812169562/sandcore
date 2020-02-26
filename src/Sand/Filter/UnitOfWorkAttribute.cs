@@ -17,7 +17,7 @@ namespace Sand.Filter
         /// 事务aop
         /// </summary>
         //[FromContainer]
-        private IUnitOfWork _uow;
+        private IWriteUnitOfWork _uow;
 
         /// <summary>
         /// 事务aop
@@ -41,7 +41,7 @@ namespace Sand.Filter
         {
             try
             {
-                _uow = context.ServiceProvider.GetService<IUnitOfWork>();
+                _uow = context.ServiceProvider.GetService<IWriteUnitOfWork>();
                 await next(context);
                 _uow.Complete();
             }
@@ -68,7 +68,7 @@ namespace Sand.Filter
     /// </summary>
     public class UowAsyncAttribute : AbstractInterceptorAttribute
     {
-        private IUnitOfWork _uow;
+        private IWriteUnitOfWork _uow;
 
         private ILog _log;
 
@@ -90,7 +90,7 @@ namespace Sand.Filter
         {
             try
             {
-                _uow = context.ServiceProvider.GetService<IUnitOfWork>();
+                _uow = context.ServiceProvider.GetService<IWriteUnitOfWork>();
                 await next(context);
                 await _uow.CompleteAsync();
             }

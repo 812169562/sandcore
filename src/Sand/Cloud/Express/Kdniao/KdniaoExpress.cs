@@ -50,7 +50,13 @@ namespace Sand.Cloud.Express.Kdniao
             var result = await restclient.ExecutePostTaskAsync(restrequest);
             return Json.ToObject<KdniaoOrderQueryResponse>(result.Content) as TResponse;
         }
-
+        /// <summary>
+        /// /
+        /// </summary>
+        /// <typeparam name="TRequest"></typeparam>
+        /// <typeparam name="TResponse"></typeparam>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public Task<TResponse> ExecuteTrace<TRequest, TResponse>(TRequest request)
         {
             throw new NotImplementedException();
