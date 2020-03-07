@@ -55,6 +55,10 @@ namespace Sand.Log.Abstractions
         /// </summary>
         string UserId { get; set; }
         /// <summary>
+        /// 操作人编号
+        /// </summary>
+        string UserName { get; set; }
+        /// <summary>
         /// 内容
         /// </summary>
         StringBuilder Content { get; set; }

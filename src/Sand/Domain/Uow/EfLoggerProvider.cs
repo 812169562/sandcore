@@ -144,7 +144,7 @@ namespace Sand.Domain.Uow
                 .Content($"事件Id: {eventId.Id}")
                 .Content($"事件名称: {eventId.Name}");
             AddContent(state);
-            _log.Exception(exception).Trace();
+            _log.Exception(exception).Debug();
         }
 
         /// <summary>

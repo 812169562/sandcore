@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Sand.Log.Less;
+using Sand.Exceptions;
 
 namespace Sand.Filter
 {
@@ -47,6 +48,16 @@ namespace Sand.Filter
             }
             catch (System.Exception ex)
             {
+                if (ex is Warning)
+                {
+                    var exception = ex as Warning;
+                    throw exception;
+                }
+                if (ex is Transform)
+                {
+                    var exception = ex as Transform;
+                    throw exception;
+                }
                 if (ex.InnerException is DbUpdateException)
                 {
                     var dbex = ex.InnerException as DbUpdateException;
@@ -57,6 +68,15 @@ namespace Sand.Filter
                 {
                     _log = Log.Log.GetLog("UowAsync");
                     ex.Submit();
+                    if (ex.InnerException != null)
+                    {
+                        ex.InnerException.Submit();
+                        if (ex.InnerException.InnerException != null)
+                        {
+                            ex.InnerException.InnerException.Submit();
+                        }
+                        throw ex.InnerException;
+                    }
                 }
                 throw ex;
             }
@@ -102,18 +122,23 @@ namespace Sand.Filter
             }
             catch (System.Exception ex)
             {
+                if (ex is Warning)
+                {
+                    var exception = ex as Warning;
+                    throw exception;
+                }
+                if (ex is Transform)
+                {
+                    var exception = ex as Transform;
+                    throw exception;
+                }
                 if (ex.InnerException is DbUpdateException)
                 {
                     var dbex = ex.InnerException as DbUpdateException;
                     _log = Log.Log.GetLog("UowAsync");
                     _log.Error(dbex.InnerException.Message);
                 }
-                else
-                {
-                    _log = Log.Log.GetLog("UowAsync");
-                    _log.Error(ex.Message);
-                }
-             
+                ex.Submit("提交事务");
                 throw ex;
             }
         }

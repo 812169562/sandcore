@@ -17,6 +17,9 @@ using Sand.Extensions;
 using Microsoft.Extensions.Logging;
 using Sand.Filter;
 using Sand.EntityFramework.UpdatePlus;
+using Sand.Context;
+using Sand.DI;
+using Sand.Helpers;
 
 namespace Sand.Domain.Uow
 {
@@ -34,6 +37,8 @@ namespace Sand.Domain.Uow
         public WriteUnitOfWork(ISqlConfig sqlConfig)
         {
             _log = Log.Log.GetLog("EfTraceLog");
+            TraceId = DateTimeExtensions.GetUnixTimestamp().ToString();
+            _log.Warn("W工作单元创建" + this.TraceId);
             _sqlConfig = sqlConfig;
         }
         /// <summary>
@@ -50,7 +55,7 @@ namespace Sand.Domain.Uow
         /// <summary>
         /// 跟踪号
         /// </summary>
-        public string TraceId { get { return DateTimeExtensions.GetUnixTimestamp().ToString(); } }
+        public string TraceId { get; }
         /// <summary>
         /// 完成提交
         /// </summary>
@@ -158,7 +163,12 @@ namespace Sand.Domain.Uow
         /// </summary>
         public override void Dispose()
         {
-            base.Dispose();
+            if (this.DbConnection.State != ConnectionState.Closed)
+            {
+                _log.Warn("W工作单元手动释放" + this.TraceId);
+                base.Dispose();
+            }
+            _log.Warn("W工作单元自动释放" + this.TraceId);
         }
     }
 }

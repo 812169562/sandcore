@@ -37,6 +37,8 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Sand.EntityFramework.EFCore;
 using Sand.EntityFramework.EF;
 using Sand.EntityFramework.Shared;
+using Sand.Exceptions;
+
 namespace Sand.EntityFramework.UpdatePlus
 {
     /// <summary>Class to batch delete.</summary>
@@ -393,48 +395,48 @@ SELECT  @totalRowAffected
                 //context.SaveChanges();
                 return list.Count;
             }
+            throw new  Warning("错误编号D001");
+            //var dbContext = query.GetDbContext();
+            //var entity = dbContext.Model.FindEntityType(typeof(T));
 
-            var dbContext = query.GetDbContext();
-            var entity = dbContext.Model.FindEntityType(typeof(T));
+            //// TODO: Select only key + lambda columns
+            ////  var keys = entity.GetKeys().ToList()[0].Properties;
+            ////var queryKeys = query.SelectByName(keys.Select(x => x.Name).ToList());
+            ////var innerObjectQuery = queryKeys.GetObjectQuery();
+            //var queryKeys = query;
 
-            // TODO: Select only key + lambda columns
-            //  var keys = entity.GetKeys().ToList()[0].Properties;
-            //var queryKeys = query.SelectByName(keys.Select(x => x.Name).ToList());
-            //var innerObjectQuery = queryKeys.GetObjectQuery();
-            var queryKeys = query;
+            //// GET UpdateSetValues
+            //var values = GetInnerValues(query, updateFactory, entity);
 
-            // GET UpdateSetValues
-            var values = GetInnerValues(query, updateFactory, entity);
+            //// CREATE command
+            //var command = CreateCommand(queryKeys, entity, values);
 
-            // CREATE command
-            var command = CreateCommand(queryKeys, entity, values);
+            //// EXECUTE
+            //var ownConnection = false;
 
-            // EXECUTE
-            var ownConnection = false;
+            //try
+            //{
+            //    if (dbContext.Database.GetDbConnection().State != ConnectionState.Open)
+            //    {
+            //        ownConnection = true;
+            //        dbContext.Database.OpenConnection();
+            //    }
 
-            try
-            {
-                if (dbContext.Database.GetDbConnection().State != ConnectionState.Open)
-                {
-                    ownConnection = true;
-                    dbContext.Database.OpenConnection();
-                }
+            //    if (Executing != null)
+            //    {
+            //        Executing(command);
+            //    }
 
-                if (Executing != null)
-                {
-                    Executing(command);
-                }
-
-                var rowAffecteds = command.ExecuteNonQuery();
-                return rowAffecteds;
-            }
-            finally
-            {
-                if (ownConnection && dbContext.Database.GetDbConnection().State != ConnectionState.Closed)
-                {
-                    dbContext.Database.CloseConnection();
-                }
-            }
+            //    var rowAffecteds = command.ExecuteNonQuery();
+            //    return rowAffecteds;
+            //}
+            //finally
+            //{
+            //    if (ownConnection && dbContext.Database.GetDbConnection().State != ConnectionState.Closed)
+            //    {
+            //        dbContext.Database.CloseConnection();
+            //    }
+            //}
 #endif
         }
 

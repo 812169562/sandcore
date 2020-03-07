@@ -33,11 +33,11 @@ namespace Sand.Domain.Repositories
         /// <summary>
         /// 写入数据库上下文(当单数据库时读写共用)
         /// </summary>
-        protected IWriteUnitOfWork WriteUow { get; set; }
+        protected virtual IWriteUnitOfWork WriteUow { get; set; }
         /// <summary>
         /// 工作单元
         /// </summary>
-        protected IReadUnitOfWork ReadUow { get; set; }
+        protected virtual IReadUnitOfWork ReadUow { get; set; }
         /// <summary>
         /// 数据模式(读写分离还是单库)
         /// </summary>

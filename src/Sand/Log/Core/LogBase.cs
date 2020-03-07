@@ -85,6 +85,7 @@ namespace Sand.Log.Core
             content.Browser = Context.Browser;
             content.Url = Context.Url;
             content.UserId = Session.LoginKey;
+            content.UserName = Session.LoginName;
         }
 
         /// <summary>

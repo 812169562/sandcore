@@ -46,10 +46,10 @@ namespace Sand.Service
         /// 工作单元
         /// </summary>
         protected readonly IWriteUnitOfWork Uow;
-        /// <summary>
-        /// 读取数据上下文
-        /// </summary>
-        protected readonly IReadUnitOfWork ReadUow;
+        ///// <summary>
+        ///// 读取数据上下文
+        ///// </summary>
+        //protected readonly IReadUnitOfWork ReadUow;
         /// <summary>
         /// 仓储
         /// </summary>
@@ -66,7 +66,7 @@ namespace Sand.Service
         /// <param name="repository">仓储</param>
         public BaseService(IRepository<TEntity, TPrimaryKey> repository)
         {
-            ReadUow = Ioc.GetService<IReadUnitOfWork>();
+            //ReadUow = Ioc.GetService<IReadUnitOfWork>();
             Uow = Ioc.GetService<IWriteUnitOfWork>();
             Repository = repository;
             UserContext = Ioc.GetService<IUserContext>();

@@ -17,6 +17,9 @@ using Sand.Extensions;
 using Microsoft.Extensions.Logging;
 using Sand.Filter;
 using Sand.EntityFramework.UpdatePlus;
+using Sand.DI;
+using Sand.Context;
+using Sand.Helpers;
 
 namespace Sand.Domain.Uow
 {
@@ -34,6 +37,8 @@ namespace Sand.Domain.Uow
         public ReadEfUnitOfWork(ISqlConfig sqlConfig)
         {
             _log = Log.Log.GetLog("EfTraceLog");
+            TraceId = DateTimeExtensions.GetUnixTimestamp().ToString();
+            _log.Warn("R工作单元创建" + this.TraceId);
             _sqlConfig = sqlConfig;
         }
         /// <summary>
@@ -50,7 +55,7 @@ namespace Sand.Domain.Uow
         /// <summary>
         /// 跟踪号
         /// </summary>
-        public string TraceId { get { return DateTimeExtensions.GetUnixTimestamp().ToString(); } }
+        public string TraceId { get; }
         /// <summary>
         /// 完成提交
         /// </summary>
@@ -94,6 +99,11 @@ namespace Sand.Domain.Uow
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            var sqlConfig = Ioc.GetService<ISqlConfig>();
+            if (sqlConfig.ReadSqlConnectionString.IsEmpty())
+            {
+                return;
+            }
             base.OnModelCreating(modelBuilder);
             foreach (IMapRegister mapper in GetMaps())
                 mapper.Register(modelBuilder);
@@ -105,10 +115,15 @@ namespace Sand.Domain.Uow
         /// <param name="optionsBuilder">Options builder</param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            var sqlConfig = Ioc.GetService<ISqlConfig>();
+            if (sqlConfig.ReadSqlConnectionString.IsEmpty())
+            {
+                return;
+            }
             try
             {
-                ConnectionString = _sqlConfig.ReadSqlConnectionString.IsEmpty()?_sqlConfig.SqlConnectionString: _sqlConfig.ReadSqlConnectionString;
-                if (_sqlConfig.DbType== DbType.Mssql)
+                ConnectionString = _sqlConfig.ReadSqlConnectionString.IsEmpty() ? _sqlConfig.SqlConnectionString : _sqlConfig.ReadSqlConnectionString;
+                if (_sqlConfig.DbType == DbType.Mssql)
                 {
                     optionsBuilder.UseSqlServer(ConnectionString);
                 }
@@ -156,7 +171,13 @@ namespace Sand.Domain.Uow
         /// </summary>
         public override void Dispose()
         {
-            base.Dispose();
+
+            if (this.DbConnection.State != ConnectionState.Closed)
+            {
+                _log.Warn("R工作单元手动释放" + this.TraceId);
+                base.Dispose();
+            }
+            _log.Warn("R工作单元自动释放" + this.TraceId);
         }
     }
 }

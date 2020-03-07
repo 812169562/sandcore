@@ -36,11 +36,11 @@ namespace Sand.Domain.Repositories
         /// <summary>
         /// 工作单元
         /// </summary>
-        protected new IWriteUnitOfWork WriteUow { get; set; }
+        protected override IWriteUnitOfWork WriteUow { get; set; }
         /// <summary>
         /// 读数据工作单元
         /// </summary>
-        protected new IReadUnitOfWork ReadUow { get; set; }
+        protected override IReadUnitOfWork ReadUow { get; set; }
         /// <summary>
         /// 
         /// </summary>

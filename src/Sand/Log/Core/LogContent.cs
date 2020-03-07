@@ -126,5 +126,9 @@ namespace Sand.Log.Core
         /// 异常
         /// </summary>
         public Warning Exception { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string UserName { get; set; }
     }
 }

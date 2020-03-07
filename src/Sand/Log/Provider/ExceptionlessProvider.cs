@@ -62,9 +62,9 @@ namespace Sand.Log.Provider
         {
             InitLine();
             var builder = CreateBuilder(level, content);
-            builder.SetUserIdentity(content.UserId);
+            builder.SetUserIdentity(content.UserName);
             builder.SetSource(content.Url);
-            builder.SetReferenceId(Uuid.Next());
+            builder.SetReferenceId(content.TraceId);
             AddProperties(builder, content as ExceptionlessContent);
             builder.Submit();
         }

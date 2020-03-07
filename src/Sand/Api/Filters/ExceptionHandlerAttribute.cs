@@ -42,15 +42,16 @@ namespace Sand.Api.Filters
                 var ex = exception as Pomelo.Data.MySql.MySqlException;
                 message = ex.GetMessage();
                 Log.Log.GetLog("Pomelo错误").Error(message);
-                context.Result = new ApiResult(StateCode.Fail, "操作超时", "");
+                context.Result = new ApiResult(StateCode.Fail, "操作超时D.", "");
+                context.Exception.Submit();
             }
             else
             {
                 message = context.Exception.GetMessage();
                 Log.Log.GetLog("SystemErrorTraceLog").Error(message);
-                context.Result = new ApiResult(StateCode.Fail, "请求失败", "");
+                context.Result = new ApiResult(StateCode.Fail, "请求失败S", "");
+                context.Exception.Submit();
             }
-            context.Exception.Submit();
         }
     }
 
