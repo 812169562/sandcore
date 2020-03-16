@@ -6,6 +6,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Sand.Log.Less;
 using Sand.Exceptions;
+using Sand.Api.Filters;
+using System.Threading;
+using Microsoft.AspNetCore.Http;
+using Sand.DI;
+using Autofac;
 
 namespace Sand.Filter
 {
@@ -78,6 +83,15 @@ namespace Sand.Filter
                         throw ex.InnerException;
                     }
                 }
+                var orig = ex.GetOriginalException();
+                if (orig != null)
+                {
+                    orig.Submit("提交事务元始异常");
+                }
+                else
+                {
+                    orig.Submit("提交事务异常");
+                }
                 throw ex;
             }
         }
@@ -92,6 +106,7 @@ namespace Sand.Filter
 
         private ILog _log;
 
+        private static int a = 1;
         /// <summary>
         /// 事务aop
         /// </summary>
@@ -111,8 +126,12 @@ namespace Sand.Filter
             try
             {
                 _uow = context.ServiceProvider.GetService<IWriteUnitOfWork>();
+                var http = DefaultIocConfig.Container.Resolve<IHttpContextAccessor>();
+                //NLog.LogManager.GetLogger("Debug").Error($"1工作单元释放{a}_" + _uow.TraceId);
+                //NLog.LogManager.GetLogger("Debug").Error($"1工作单元释放{a}_" + http.HttpContext.TraceIdentifier);
+                //NLog.LogManager.GetLogger("Debug").Error($"1工作单元释放{a}_" + _uow.TraceId+"__" +http.HttpContext.TraceIdentifier);
                 await next(context);
-                await _uow.CompleteAsync();
+                await  _uow.CompleteAsync();
             }
             catch (DbUpdateException ex)
             {
@@ -138,7 +157,15 @@ namespace Sand.Filter
                     _log = Log.Log.GetLog("UowAsync");
                     _log.Error(dbex.InnerException.Message);
                 }
-                ex.Submit("提交事务");
+                var orig = ex.GetOriginalException();
+                if (orig != null)
+                {
+                    orig.Submit("提交事务元始异常");
+                }
+                else
+                {
+                    orig.Submit("提交事务异常");
+                }
                 throw ex;
             }
         }

@@ -12,7 +12,7 @@ namespace Sand.Domain.Uow
     /// <summary>
     /// 工作单元
     /// </summary>
-    public interface IReadUnitOfWork : IUnitOfWork,IDependency
+    public interface IReadUnitOfWork : IUnitOfWork, IDependency
     {
     }
 }

@@ -448,7 +448,7 @@ namespace Sand.Data
         public void Dispose()
         {
             Close();
-            if (DbConnection != null &&WriteDbConnection.State == ConnectionState.Open)
+            if (DbConnection != null && DbConnection.State == ConnectionState.Open)
             {
                 DbConnection?.Dispose();
             }

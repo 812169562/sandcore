@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <LangVersion>7.1</LangVersion>
-    <Version>1.1.58</Version>
+    <Version>1.1.66</Version>
     <Authors>yy</Authors>
     <Product>yy</Product>
     <Description>新增腾讯云身份证识别</Description>
@@ -13,8 +13,8 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/812169562/sandcore.git</RepositoryUrl>
     <RepositoryType>C#</RepositoryType>
-    <AssemblyVersion>1.1.58.0</AssemblyVersion>
-    <FileVersion>1.1.58.0</FileVersion>
+    <AssemblyVersion>1.1.66.0</AssemblyVersion>
+    <FileVersion>1.1.66.0</FileVersion>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <NeutralLanguage />
   </PropertyGroup>
@@ -25,10 +25,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="EntityFramework\**" />
     <Compile Remove="Events\Internal\**" />
     <Compile Remove="Log\Payment\**" />
+    <EmbeddedResource Remove="EntityFramework\**" />
     <EmbeddedResource Remove="Events\Internal\**" />
     <EmbeddedResource Remove="Log\Payment\**" />
+    <None Remove="EntityFramework\**" />
     <None Remove="Events\Internal\**" />
     <None Remove="Log\Payment\**" />
   </ItemGroup>
@@ -58,8 +61,6 @@
     <Folder Include="Cloud\Tencent\Ocr\" />
     <Folder Include="Domain\Services\" />
     <Folder Include="Domain\Events\" />
-    <Folder Include="EntityFramework\EFCore\" />
-    <Folder Include="EntityFramework\EF\" />
   </ItemGroup>
 
   <ItemGroup>

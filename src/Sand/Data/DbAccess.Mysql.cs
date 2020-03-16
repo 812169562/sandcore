@@ -22,6 +22,7 @@ using Sand.Extensions;
 using Sand.Filter;
 using Sand.Helpers;
 using Sand.Log.Extensions;
+using Sand.Log.Less;
 using Sand.Result;
 
 namespace Sand.Data
@@ -410,6 +411,7 @@ namespace Sand.Data
             }
             catch (Exception ex)
             {
+                ex.Submit("RSql");
                 throw ex;
             }
         }
@@ -433,6 +435,7 @@ namespace Sand.Data
             }
             catch (Exception ex)
             {
+                ex.Submit("WSql");
                 throw ex;
             }
         }
@@ -442,16 +445,25 @@ namespace Sand.Data
         /// </summary>
         public void Dispose()
         {
-            Close();
-            if (DbConnection != null && WriteDbConnection.State == ConnectionState.Open)
+            try
             {
-                DbConnection?.Dispose();
+                Close();
+                if (DbConnection != null && DbConnection.State == ConnectionState.Open)
+                {
+                    DbConnection?.Dispose();
+                }
+                WriteClose();
+                if (WriteDbConnection != null && WriteDbConnection.State == ConnectionState.Open)
+                {
+                    WriteDbConnection?.Dispose();
+                }
             }
-            WriteClose();
-            if (WriteDbConnection != null &&WriteDbConnection.State == ConnectionState.Open)
+            catch (Exception ex)
             {
-                WriteDbConnection?.Dispose();
+                ex.Submit("Dispose");
+                throw ex;
             }
+        
         }
 
         #endregion

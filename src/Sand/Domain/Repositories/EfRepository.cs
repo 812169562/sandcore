@@ -9,12 +9,11 @@ using Sand.Domain.Entities;
 using Sand.Domain.Uow;
 using Sand.Exceptions;
 using Sand.Lambdas.Dynamics;
-using Sand.EntityFramework.UpdatePlus.Extensions;
-using Sand.EntityFramework.UpdatePlus;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Sand.Helpers;
 using Sand.Context;
 using Sand.DI;
+using Sand.EntityFramework.UpdatePlus;
 
 namespace Sand.Domain.Repositories
 {
@@ -32,7 +31,7 @@ namespace Sand.Domain.Repositories
         /// <summary>
         /// 读取数据集合实体集
         /// </summary>
-        public override DbSet<TEntity> ReadTable { get { if (DbMode == Utils.Enums.DbMode.Single) return Table; return ReadUow.Set<TEntity>(); } }
+        public override DbSet<TEntity> ReadTable { get { if (ReadUow == null) return Table; return ReadUow.Set<TEntity>(); } }
         /// <summary>
         /// 工作单元
         /// </summary>
@@ -41,13 +40,16 @@ namespace Sand.Domain.Repositories
         /// 读数据工作单元
         /// </summary>
         protected override IReadUnitOfWork ReadUow { get; set; }
+
         /// <summary>
-        /// 
+        /// 初始化
         /// </summary>
-        public EfRepository()
+        /// <param name="readUnitOfWork">读取数据库工作单元</param>
+        /// <param name="writeUnitOfWork">写人数据库工作单元</param>
+        public EfRepository(IReadUnitOfWork readUnitOfWork, IWriteUnitOfWork writeUnitOfWork)
         {
-            WriteUow = Ioc.GetService<IWriteUnitOfWork>();
-            ReadUow = DbMode == Utils.Enums.DbMode.Single ? null : Ioc.GetService<IReadUnitOfWork>();
+            WriteUow = writeUnitOfWork;
+            ReadUow = DbMode == Utils.Enums.DbMode.Single ? null : readUnitOfWork;
         }
         /// <summary>
         /// 附加
@@ -160,8 +162,19 @@ namespace Sand.Domain.Repositories
         /// <returns></returns>
         public override TEntity RetrieveById(TPrimaryKey id)
         {
-            return Table.Find(id);
+            return ReadTable.Find(id);
         }
+
+        /// <summary>
+        /// 异步根据编号查询实体
+        /// </summary>
+        /// <param name="id">实体编号</param>
+        /// <returns>创建后的实体集</returns>
+        public override async Task<TEntity> RetrieveByIdAsync(TPrimaryKey id)
+        {
+            return await ReadTable.FindAsync(id);
+        }
+
         /// <summary>
         /// 根据编号查询数据
         /// </summary>
@@ -244,7 +257,7 @@ namespace Sand.Domain.Repositories
         /// <returns>更新成功条数</returns>
         public override async Task<int> UpdateAsync(TPrimaryKey id, Expression<Func<TEntity, TEntity>> update)
         {
-            return await Table.Where(t => t.Id.Equals(id)).UpdateAsync(update);
+            return await Table.Where(t => t.Id.Equals(id)).UpdateAsync(WriteUow,update, GetUpdateFactory());
         }
         /// <summary>
         /// 部分跟新实体（根据条件部分更新,必须写表达式）
@@ -254,7 +267,7 @@ namespace Sand.Domain.Repositories
         /// <returns>更新成功条数</returns>
         public override async Task<int> UpdateAsync(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TEntity>> updateFactory)
         {
-            return await Table.Where(predicate).UpdateAsync(updateFactory, GetUpdateFactory());
+            return await Table.Where(predicate).UpdateAsync(WriteUow,updateFactory, GetUpdateFactory());
         }
         private Expression<Func<TEntity, TEntity>> GetUpdateFactory()
         {
@@ -276,7 +289,7 @@ namespace Sand.Domain.Repositories
         /// <returns>更新成功条数</returns>
         public override int Update(TPrimaryKey id, Expression<Func<TEntity, TEntity>> update)
         {
-            return Table.Where(t => t.Id.Equals(id)).Update(update);
+            return Table.Where(t => t.Id.Equals(id)).Update(WriteUow,update);
         }
         /// <summary>
         /// 部分跟新实体（根据条件部分更新,必须写表达式）
@@ -286,7 +299,7 @@ namespace Sand.Domain.Repositories
         /// <returns>更新成功条数</returns>
         public override int Update(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TEntity>> update)
         {
-            return Table.Where(predicate).Update(update);
+            return Table.Where(predicate).Update(WriteUow, update);
         }
 
         /// <summary>
@@ -412,9 +425,11 @@ namespace Sand.Domain.Repositories
     public class EfRepository<TEntity> : EfRepository<TEntity, string> where TEntity : class, IEntity<string>, new()
     {
         /// <summary>
-        /// 
+        /// 初始化
         /// </summary>
-        public EfRepository()
+        /// <param name="readUnitOfWork">读取数据库工作单元</param>
+        /// <param name="writeUnitOfWork">写人数据库工作单元</param>
+        public EfRepository(IReadUnitOfWork readUnitOfWork, IWriteUnitOfWork writeUnitOfWork) : base(readUnitOfWork, writeUnitOfWork)
         {
         }
     }

@@ -43,14 +43,34 @@ namespace Sand.Api.Filters
                 message = ex.GetMessage();
                 Log.Log.GetLog("Pomelo错误").Error(message);
                 context.Result = new ApiResult(StateCode.Fail, "操作超时D.", "");
-                context.Exception.Submit();
+                var ex2 = context.Exception.GetOriginalException();
+                if (ex2 != null)
+                {
+                    ex2.Submit();
+                }
+                else
+                {
+                    context.Exception.Submit();
+                }
             }
             else
             {
                 message = context.Exception.GetMessage();
                 Log.Log.GetLog("SystemErrorTraceLog").Error(message);
-                context.Result = new ApiResult(StateCode.Fail, "请求失败S", "");
-                context.Exception.Submit();
+                context.Result = new ApiResult(StateCode.Fail, "请求失败,联系管理员", "");
+                if (context.Exception.InnerException!=null)
+                {
+                    context.Exception.InnerException.Submit();
+                }
+                else
+                {
+                    var ex = context.Exception.GetOriginalException();
+                    if (ex!=null)
+                    {
+                        ex.Submit();
+                    }
+                    context.Exception.Submit();
+                }
             }
         }
     }

@@ -26,7 +26,7 @@ namespace Sand.Domain.Uow
     /// <summary>
     /// ef工作单元
     /// </summary>
-    public class WriteUnitOfWork : DbContext, IWriteUnitOfWork
+    public class WriteEfUnitOfWork : DbContext, IWriteUnitOfWork
     {
         private readonly ILog _log;
         private readonly ISqlConfig _sqlConfig;
@@ -34,24 +34,19 @@ namespace Sand.Domain.Uow
         /// ef工作单元
         /// </summary>
         /// <param name="sqlConfig">sql配置</param>
-        public WriteUnitOfWork(ISqlConfig sqlConfig)
+        public WriteEfUnitOfWork(ISqlConfig sqlConfig)
         {
             _log = Log.Log.GetLog("EfTraceLog");
-            TraceId = DateTimeExtensions.GetUnixTimestamp().ToString();
-            _log.Warn("W工作单元创建" + this.TraceId);
+            //TraceId = DateTimeExtensions.GetUnixTimestamp().ToString();
+            //_log.Warn("W工作单元创建" + this.TraceId);
+            TraceId = Uuid.Next();
+            //NLog.LogManager.GetLogger("Debug").Error("W工作单元创建" + this.TraceId);
             _sqlConfig = sqlConfig;
         }
         /// <summary>
         /// 连接
         /// </summary>
         public string ConnectionString { get; set; }
-        /// <summary>
-        /// 连接
-        /// </summary>
-        /// <param name="connectionString"></param>
-        public WriteUnitOfWork(string connectionString)
-        {
-        }
         /// <summary>
         /// 跟踪号
         /// </summary>
@@ -61,7 +56,7 @@ namespace Sand.Domain.Uow
         /// </summary>
         public void Complete()
         {
-            this.SaveChanges();
+            base.SaveChanges();
         }
 
         /// <summary>
@@ -71,7 +66,7 @@ namespace Sand.Domain.Uow
 
         public async Task CompleteAsync()
         {
-            await this.SaveChangesAsync();
+            await base.SaveChangesAsync();
         }
         /// <summary>
         /// 回滚
@@ -114,7 +109,7 @@ namespace Sand.Domain.Uow
             try
             {
                 ConnectionString = _sqlConfig.SqlConnectionString;
-                if (_sqlConfig.DbType== DbType.Mssql)
+                if (_sqlConfig.DbType == DbType.Mssql)
                 {
                     optionsBuilder.UseSqlServer(ConnectionString);
                 }
@@ -122,9 +117,9 @@ namespace Sand.Domain.Uow
                 {
                     optionsBuilder.UseMySql(ConnectionString);
                 }
-                optionsBuilder.EnableSensitiveDataLogging();
-                BatchUpdateManager.InMemoryDbContextFactory = () => this;
-                optionsBuilder.UseLoggerFactory(new LoggerFactory(new[] { new EfLoggerProvider(_log, this) }));
+                //optionsBuilder.EnableSensitiveDataLogging();
+                //BatchUpdateManager.InMemoryDbContextFactory = () => this;
+                //optionsBuilder.UseLoggerFactory(new LoggerFactory(new[] { new EfLoggerProvider(_log, this) }));
             }
             catch (Exception ex)
             {
@@ -163,12 +158,10 @@ namespace Sand.Domain.Uow
         /// </summary>
         public override void Dispose()
         {
-            if (this.DbConnection.State != ConnectionState.Closed)
-            {
-                _log.Warn("W工作单元手动释放" + this.TraceId);
-                base.Dispose();
-            }
-            _log.Warn("W工作单元自动释放" + this.TraceId);
+            //NLog.LogManager.GetLogger("Debug").Error("W工作单元释放1_" + this.TraceId);
+            base.Dispose();
+            //NLog.LogManager.GetLogger("Debug").Error("W工作单元释放2_" + this.TraceId);
         }
     }
+
 }
