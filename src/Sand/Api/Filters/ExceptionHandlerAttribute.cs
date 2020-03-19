@@ -30,6 +30,7 @@ namespace Sand.Api.Filters
                 var ex = exception as Warning;
                 message = ex.Messages;
                 context.Result = new ApiResult(StateCode.Fail, message, null, ((Warning)exception).Code);
+                Log.Log.GetLog("Error").Warn(message);
             }
             else if (context.Exception.GetOriginalException() is Transform)
             {
@@ -56,21 +57,13 @@ namespace Sand.Api.Filters
             else
             {
                 message = context.Exception.GetMessage();
-                Log.Log.GetLog("SystemErrorTraceLog").Error(message);
                 context.Result = new ApiResult(StateCode.Fail, "请求失败,联系管理员", "");
-                if (context.Exception.InnerException!=null)
+                var ex = context.Exception.GetOriginalException();
+                if (ex != null)
                 {
-                    context.Exception.InnerException.Submit();
+                    ex.Submit();
                 }
-                else
-                {
-                    var ex = context.Exception.GetOriginalException();
-                    if (ex!=null)
-                    {
-                        ex.Submit();
-                    }
-                    context.Exception.Submit();
-                }
+                context.Exception.Submit();
             }
         }
     }

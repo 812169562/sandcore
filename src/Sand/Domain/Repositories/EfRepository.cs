@@ -196,7 +196,7 @@ namespace Sand.Domain.Repositories
             if (entity == null)
                 throw new Warning("操作错误:保存的对象已经不存在");
             WriteUow.Entry(entity).State = EntityState.Detached;
-            var old = this.RetrieveById(entity.Id);
+            var old = Table.Find(entity.Id);
             if (old.Version != entity.Version)
             {
                 if (old.Version == null || entity.Version == null)
@@ -228,7 +228,7 @@ namespace Sand.Domain.Repositories
             if (entity == null)
                 throw new Warning("操作错误:保存的对象已经不存在");
             WriteUow.Entry(entity).State = EntityState.Detached;
-            var old = await this.RetrieveByIdAsync(entity.Id);
+            var old = await Table.FindAsync(entity.Id);
             if (old.Version != entity.Version)
             {
                 if (old.Version == null || entity.Version == null)
@@ -257,7 +257,7 @@ namespace Sand.Domain.Repositories
         /// <returns>更新成功条数</returns>
         public override async Task<int> UpdateAsync(TPrimaryKey id, Expression<Func<TEntity, TEntity>> update)
         {
-            return await Table.Where(t => t.Id.Equals(id)).UpdateAsync(WriteUow,update, GetUpdateFactory());
+            return await Table.Where(t => t.Id.Equals(id)).UpdateAsync(WriteUow, update, GetUpdateFactory());
         }
         /// <summary>
         /// 部分跟新实体（根据条件部分更新,必须写表达式）
@@ -267,7 +267,7 @@ namespace Sand.Domain.Repositories
         /// <returns>更新成功条数</returns>
         public override async Task<int> UpdateAsync(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TEntity>> updateFactory)
         {
-            return await Table.Where(predicate).UpdateAsync(WriteUow,updateFactory, GetUpdateFactory());
+            return await Table.Where(predicate).UpdateAsync(WriteUow, updateFactory, GetUpdateFactory());
         }
         private Expression<Func<TEntity, TEntity>> GetUpdateFactory()
         {
@@ -289,7 +289,7 @@ namespace Sand.Domain.Repositories
         /// <returns>更新成功条数</returns>
         public override int Update(TPrimaryKey id, Expression<Func<TEntity, TEntity>> update)
         {
-            return Table.Where(t => t.Id.Equals(id)).Update(WriteUow,update);
+            return Table.Where(t => t.Id.Equals(id)).Update(WriteUow, update);
         }
         /// <summary>
         /// 部分跟新实体（根据条件部分更新,必须写表达式）
@@ -344,7 +344,7 @@ namespace Sand.Domain.Repositories
             var entity = Table.Local.FirstOrDefault(ent => EqualityComparer<TPrimaryKey>.Default.Equals(ent.Id, id));
             if (entity == null)
             {
-                entity = RetrieveById(id);
+                entity = Table.Find(id);
                 if (entity == null)
                 {
                     throw new Warning("当前操作数据不是最新数据,请重新刷新页面再操作！");

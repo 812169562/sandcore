@@ -23,19 +23,13 @@ namespace Sand.Filter
         /// 事务aop
         /// </summary>
         //[FromContainer]
-        private IWriteUnitOfWork _uow;
-
-        /// <summary>
-        /// 事务aop
-        /// </summary>
-        //[FromContainer]
         private ILog _log;
         /// <summary>
         /// 事务aop
         /// </summary>
         public UowAttribute()
         {
-
+            _log = Log.Log.GetLog("UowAsync");
         }
         /// <summary>
         /// 执行
@@ -47,9 +41,9 @@ namespace Sand.Filter
         {
             try
             {
-                _uow = context.ServiceProvider.GetService<IWriteUnitOfWork>();
+                var uow = context.ServiceProvider.GetService<IWriteUnitOfWork>();
                 await next(context);
-                _uow.Complete();
+                uow.Complete();
             }
             catch (System.Exception ex)
             {
@@ -66,12 +60,11 @@ namespace Sand.Filter
                 if (ex.InnerException is DbUpdateException)
                 {
                     var dbex = ex.InnerException as DbUpdateException;
-                    _log = Log.Log.GetLog("UowAsync");
+
                     _log.Error(dbex.InnerException.Message);
                 }
                 else
                 {
-                    _log = Log.Log.GetLog("UowAsync");
                     ex.Submit();
                     if (ex.InnerException != null)
                     {
@@ -102,17 +95,14 @@ namespace Sand.Filter
     /// </summary>
     public class UowAsyncAttribute : AbstractInterceptorAttribute
     {
-        private IWriteUnitOfWork _uow;
-
         private ILog _log;
 
-        private static int a = 1;
         /// <summary>
         /// 事务aop
         /// </summary>
         public UowAsyncAttribute()
         {
-
+            _log = Log.Log.GetLog("UowAsync");
         }
 
         /// <summary>
@@ -125,17 +115,16 @@ namespace Sand.Filter
         {
             try
             {
-                _uow = context.ServiceProvider.GetService<IWriteUnitOfWork>();
+                var uow = context.ServiceProvider.GetService<IWriteUnitOfWork>();
                 var http = DefaultIocConfig.Container.Resolve<IHttpContextAccessor>();
                 //NLog.LogManager.GetLogger("Debug").Error($"1工作单元释放{a}_" + _uow.TraceId);
                 //NLog.LogManager.GetLogger("Debug").Error($"1工作单元释放{a}_" + http.HttpContext.TraceIdentifier);
                 //NLog.LogManager.GetLogger("Debug").Error($"1工作单元释放{a}_" + _uow.TraceId+"__" +http.HttpContext.TraceIdentifier);
                 await next(context);
-                await  _uow.CompleteAsync();
+                await uow.CompleteAsync();
             }
             catch (DbUpdateException ex)
             {
-                _log = Log.Log.GetLog("UowAsync");
                 _log.Error(ex.Message);
                 throw ex;
             }
@@ -154,7 +143,6 @@ namespace Sand.Filter
                 if (ex.InnerException is DbUpdateException)
                 {
                     var dbex = ex.InnerException as DbUpdateException;
-                    _log = Log.Log.GetLog("UowAsync");
                     _log.Error(dbex.InnerException.Message);
                 }
                 var orig = ex.GetOriginalException();
