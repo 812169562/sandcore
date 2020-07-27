@@ -15,8 +15,8 @@ namespace Sand.Events
         /// </summary>
         /// <param name="event"></param>
         /// <returns></returns>
-        public bool CanHandle(IEvent @event)
-            => typeof(T).Equals(@event.GetType());
+        public async Task<bool> CanHandle(IEvent @event)
+        => await Task.FromResult(typeof(T).Equals(@event.GetType()));
 
         /// <summary>
         /// 
@@ -31,7 +31,6 @@ namespace Sand.Events
         /// <param name="event"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task<bool> HandleAsync(IEvent @event, CancellationToken cancellationToken = default)
-            => CanHandle(@event) ? HandleAsync((T)@event, cancellationToken) : Task.FromResult(false);
+        public async Task<bool> HandleAsync(IEvent @event, CancellationToken cancellationToken = default) => await CanHandle(@event) ? await HandleAsync((T)@event, cancellationToken) : await Task.FromResult(false);
     }
 }

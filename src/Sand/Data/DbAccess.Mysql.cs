@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -42,11 +43,11 @@ namespace Sand.Data
         /// <summary>
         /// 数据库连接
         /// </summary>
-        public IDbConnection DbConnection { get; set; }
+        public DbConnection DbConnection { get; set; }
         /// <summary>
         /// 数据库连接（写入数据库使用）
         /// </summary>
-        public IDbConnection WriteDbConnection { get; set; }
+        public DbConnection WriteDbConnection { get; set; }
         /// <summary>
         /// 连接配置
         /// </summary>
@@ -115,7 +116,7 @@ namespace Sand.Data
         public async Task<IEnumerable<TResult>> QueryAsync<TResult>(string sql, IDictionary<string, object> param = null)
         {
             this.CreateDbConnection();
-            this.Open();
+            await this.OpenAsync();
             WriteTraceLog(sql, param);
             var query = await DbConnection.QueryAsync<TResult>(sql, param);
             _log.Trace("查询结束");
@@ -130,7 +131,7 @@ namespace Sand.Data
         /// <returns>结果集合</returns>
         public async Task ExecuteAsync(string sql, object param = null)
         {
-            this.OpenWrite();
+            await this.OpenWriteAsync();
             WriteTraceLog(sql, ToDictionary(param));
             await WriteDbConnection.ExecuteAsync(sql, param);
             _log.Trace("执行完成");
@@ -198,7 +199,7 @@ namespace Sand.Data
         public async Task<Paged<TResult>> QueryPageAsync<TResult>(string selectSql, string whereSql, string orderbySql, IQuery query)
         {
             this.CreateDbConnection();
-            this.Open();
+            await this.OpenAsync();
             Paged<TResult> pagedResult = new Paged<TResult>();
             var parameters = ToDictionary(query.Param);
             var sql = selectSql.Add(whereSql);
@@ -371,7 +372,8 @@ namespace Sand.Data
         /// <summary>
         /// 打开数据库连接
         /// </summary>
-        protected void OpenWrite() {
+        protected void OpenWrite()
+        {
             try
             {
                 if (WriteDbConnection == null)
@@ -385,6 +387,57 @@ namespace Sand.Data
                 if (WriteDbConnection.State == ConnectionState.Closed)
                 {
                     WriteDbConnection.Open();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// 打开数据库连接
+        /// </summary>
+        protected async Task OpenAsync()
+        {
+            try
+            {
+                if (DbConnection == null)
+                {
+                    CreateDbConnection();
+                    if (DbConnection.State == ConnectionState.Closed)
+                    {
+                        await DbConnection.OpenAsync();
+                    }
+                }
+                if (DbConnection.State == ConnectionState.Closed)
+                {
+                    await DbConnection.OpenAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// 打开数据库连接
+        /// </summary>
+        protected async Task OpenWriteAsync()
+        {
+            try
+            {
+                if (WriteDbConnection == null)
+                {
+                    CreateWriteDbConnection();
+                    if (WriteDbConnection.State == ConnectionState.Closed)
+                    {
+                        await WriteDbConnection.OpenAsync();
+                    }
+                }
+                if (WriteDbConnection.State == ConnectionState.Closed)
+                {
+                    await WriteDbConnection.OpenAsync();
                 }
             }
             catch (Exception ex)
@@ -463,7 +516,7 @@ namespace Sand.Data
                 ex.Submit("Dispose");
                 throw ex;
             }
-        
+
         }
 
         #endregion
@@ -648,6 +701,24 @@ namespace Sand.Data
             {
                 this.CreateDbConnection();
                 this.Open();
+            }
+            return this;
+        }
+
+        /// <summary>
+        /// 启动开始
+        /// </summary>
+        /// <returns></returns>
+        public async Task<ISqlQuery> BeginAsync(bool iswrite = false)
+        {
+            if (iswrite)
+            {
+                await this.OpenWriteAsync();
+            }
+            else
+            {
+                this.CreateDbConnection();
+                await this.OpenAsync();
             }
             return this;
         }

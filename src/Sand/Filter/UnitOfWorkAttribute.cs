@@ -115,11 +115,7 @@ namespace Sand.Filter
         {
             try
             {
-                var uow = context.ServiceProvider.GetService<IWriteUnitOfWork>();
-                var http = DefaultIocConfig.Container.Resolve<IHttpContextAccessor>();
-                //NLog.LogManager.GetLogger("Debug").Error($"1工作单元释放{a}_" + _uow.TraceId);
-                //NLog.LogManager.GetLogger("Debug").Error($"1工作单元释放{a}_" + http.HttpContext.TraceIdentifier);
-                //NLog.LogManager.GetLogger("Debug").Error($"1工作单元释放{a}_" + _uow.TraceId+"__" +http.HttpContext.TraceIdentifier);
+                 var uow = context.ServiceProvider.GetService<IWriteUnitOfWork>();
                 await next(context);
                 await uow.CompleteAsync();
             }

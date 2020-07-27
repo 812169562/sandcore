@@ -86,6 +86,7 @@ namespace Sand.Api.Filters
                 return ex;
             if (ex is Pomelo.Data.MySql.MySqlException)
                 return ex;
+
             if (ex.InnerException == null) return ex;
             return ex.InnerException.GetOriginalException();
         }

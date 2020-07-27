@@ -122,8 +122,8 @@ namespace Sand.Domain.Uow
                 {
                     optionsBuilder.UseMySql(ConnectionString);
                 }
-                //optionsBuilder.EnableSensitiveDataLogging();
-                //optionsBuilder.UseLoggerFactory(new LoggerFactory(new[] { new EfLoggerProvider(_log, this) }));
+               optionsBuilder.EnableSensitiveDataLogging();
+               optionsBuilder.UseLoggerFactory(new LoggerFactory(new[] { new EfLoggerProvider(_log, this) }));
             }
             catch (Exception ex)
             {

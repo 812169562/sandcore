@@ -1,27 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
+using System.Data.Common;
 using System.Threading.Tasks;
-using Autofac;
-using Dapper;
-using Dapper.Contrib;
-using Dapper.Contrib.Extensions;
-using MySql.Data.MySqlClient;
 //using Pomelo.Data.MySql;
-using Sand.Context;
-using Sand.DI;
 using Sand.Domain.Entities;
 using Sand.Domain.Query;
-using Sand.Domain.Uow;
-using Sand.Extensions;
-using Sand.Filter;
-using Sand.Helpers;
-using Sand.Log.Extensions;
 using Sand.Result;
 
 namespace Sand.Data
@@ -36,7 +19,13 @@ namespace Sand.Data
         /// </summary>
         /// <param name="iswrite">是否为写入数据库</param>
         /// <returns></returns>
-        ISqlQuery Begin(bool iswrite=false);
+        ISqlQuery Begin(bool iswrite = false);
+        /// <summary>
+        /// 开启数据库
+        /// </summary>
+        /// <param name="iswrite">是否为写入数据库</param>
+        /// <returns></returns>
+        Task<ISqlQuery> BeginAsync(bool iswrite = false);
         /// <summary>
         /// 初始化where（1=1）
         /// </summary>
@@ -44,11 +33,11 @@ namespace Sand.Data
         /// <summary>
         /// 数据库连接
         /// </summary>
-        IDbConnection DbConnection { get; set; }
+        DbConnection DbConnection { get; set; }
         /// <summary>
         /// 数据库连接（写入数据库使用）
         /// </summary>
-        IDbConnection WriteDbConnection { get; set; }
+        DbConnection WriteDbConnection { get; set; }
         /// <summary>
         /// 查询数据对象
         /// </summary>

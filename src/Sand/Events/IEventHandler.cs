@@ -23,7 +23,7 @@ namespace Sand.Events
         /// </summary>
         /// <param name="event"></param>
         /// <returns></returns>
-        bool CanHandle(IEvent @event);
+        Task<bool> CanHandle(IEvent @event);
     }
     /// <summary>
     /// 

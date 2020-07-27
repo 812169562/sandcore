@@ -27,6 +27,10 @@ namespace Sand.Utils.Tree
             }
             foreach (var chapter in dic.Values)
             {
+                if (chapter.ParentId==null)
+                {
+                    chapter.ParentId = "";
+                }
                 if (dic.ContainsKey(chapter.ParentId))
                 {
                     if (dic[chapter.ParentId].Children == null)
@@ -67,6 +71,10 @@ namespace Sand.Utils.Tree
             }
             foreach (var chapter in dic.Values)
             {
+                if (chapter.ParentId == null)
+                {
+                    chapter.ParentId = "";
+                }
                 if (dic.ContainsKey(chapter.ParentId))
                 {
                     if (dic[chapter.ParentId].Children == null)

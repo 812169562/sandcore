@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <LangVersion>7.1</LangVersion>
-    <Version>1.1.67</Version>
+    <Version>1.1.68</Version>
     <Authors>yy</Authors>
     <Product>yy</Product>
     <Description>新增腾讯云身份证识别</Description>
@@ -37,6 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\DbAccess.Mssql.cs" />
     <Compile Remove="DI\Container.cs" />
     <Compile Remove="Events\EventBusBase.cs" />
     <Compile Remove="Events\EventBusPack.cs" />
@@ -103,6 +104,7 @@
     <PackageReference Include="StaticDotNet.EntityFrameworkCore.ModelConfiguration" Version="1.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="4.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="4.0.1" />
+    <PackageReference Include="System.Data.Common" Version="4.3.0" />
     <PackageReference Include="TencentCloudSDK" Version="3.0.44" />
   </ItemGroup>
 

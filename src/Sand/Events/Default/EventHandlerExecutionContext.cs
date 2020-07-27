@@ -21,7 +21,7 @@ namespace Sand.Events.Default
         /// </summary>
         /// <param name="registry">事件</param>
         /// <param name="serviceProviderFactory">事件处理器</param>
-        public EventHandlerExecutionContext(IServiceCollection registry, 
+        public EventHandlerExecutionContext(IServiceCollection registry,
             Func<IServiceCollection, IServiceProvider> serviceProviderFactory = null)
         {
             this.registry = registry;
@@ -42,10 +42,10 @@ namespace Sand.Events.Default
                 var serviceProvider = this.serviceProviderFactory(this.registry);
                 using (var childScope = serviceProvider.CreateScope())
                 {
-                    foreach(var handlerType in handlerTypes)
+                    foreach (var handlerType in handlerTypes)
                     {
                         var handler = (IEventHandler)childScope.ServiceProvider.GetService(handlerType);
-                        if (handler.CanHandle(@event))
+                        if (await handler.CanHandle(@event))
                         {
                             await handler.HandleAsync(@event, cancellationToken);
                         }

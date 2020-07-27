@@ -7,6 +7,7 @@ using Sand.Helpers;
 using Sand.Extensions;
 using System.Linq;
 using System.ComponentModel.DataAnnotations.Schema;
+using Sand.Utils.Enums;
 
 namespace Sand.Domain.Entities
 {
@@ -68,10 +69,6 @@ namespace Sand.Domain.Entities
         /// 是否可用
         /// </summary>
         bool IsEnable { get; set; }
-        /// <summary>
-        /// 状态
-        /// </summary>
-        int Status { get; set; }
         /// <summary>
         /// 批量更新使用编号应该和主键相同
         /// </summary>
@@ -156,7 +153,6 @@ namespace Sand.Domain.Entities
             this.StroeId = this.CreateId;
             this.TenantId = this.CreateId;
             this.IsEnable = true;
-            //this.Status = 1;
             this.SetUpdateUser(userContext);
         }
         /// <summary>
@@ -226,22 +222,15 @@ namespace Sand.Domain.Entities
         [Required]
         public virtual bool IsEnable { get; set; }
         /// <summary>
-        /// 状态
-        /// </summary>
-        [Required]
-        public virtual int Status { get; set; }
-        /// <summary>
         /// 版本号
         /// </summary>
         [Required]
         public virtual string Version { get; set; }
-
         /// <summary>
         /// 批量更新使用编号应该和主键相同
         /// </summary>
         [NotMapped]
         public virtual TPrimaryKey BatchUpdateId { get { return this.Id; } }
-
         /// <summary>
         /// 相等运算
         /// </summary>
