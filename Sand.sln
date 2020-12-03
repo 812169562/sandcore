@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "WebAppli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.Service", "Test.Service\Test.Service.csproj", "{9C7E0EDD-8A62-4D0D-B3C2-F25873F7F15F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{D8F366AD-F4CE-48A1-A36E-3CC8AEBAA491}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{D8F366AD-F4CE-48A1-A36E-3CC8AEBAA491}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

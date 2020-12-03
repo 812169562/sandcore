@@ -1,5 +1,4 @@
-﻿using AspectCore.Injector;
-using Autofac;
+﻿using Autofac;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Sand.Context;

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Sand.Result;
 using Sand.Domain.Query;
 using Sand.Domain.Entities;
+using Sand.Cache;
 
 namespace Sand.Service
 {

@@ -1,5 +1,4 @@
 ﻿using AspectCore.DynamicProxy;
-using AspectCore.Injector;
 using Sand.Domain.Uow;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,18 +10,20 @@ using System.Threading;
 using Microsoft.AspNetCore.Http;
 using Sand.DI;
 using Autofac;
+using AspectCore.Extensions.AspectScope;
 
 namespace Sand.Filter
 {
     /// <summary>
     /// 事务aop
     /// </summary>
-    public class UowAttribute : AbstractInterceptorAttribute
+    public class UowAttribute : ScopeInterceptorAttribute
     {
+        public override Scope Scope { get; set; } = Scope.Nested;
         /// <summary>
         /// 事务aop
         /// </summary>
-        //[FromContainer]
+        //[FromServiceContext]
         private ILog _log;
         /// <summary>
         /// 事务aop
@@ -93,8 +94,10 @@ namespace Sand.Filter
     /// <summary>
     /// 事务aop
     /// </summary>
-    public class UowAsyncAttribute : AbstractInterceptorAttribute
+    public class UowAsyncAttribute : ScopeInterceptorAttribute
     {
+        public override Scope Scope { get; set; } = Scope.Nested;
+
         private ILog _log;
 
         /// <summary>
@@ -115,7 +118,7 @@ namespace Sand.Filter
         {
             try
             {
-                 var uow = context.ServiceProvider.GetService<IWriteUnitOfWork>();
+                var uow = context.ServiceProvider.GetService<IWriteUnitOfWork>();
                 await next(context);
                 await uow.CompleteAsync();
             }

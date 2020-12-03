@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using Sand.Dependency;
 using NLog;
 using AspectCore.DynamicProxy;
-using AspectCore.Injector;
 using Sand.Context;
 using Microsoft.Extensions.Logging;
+using AspectCore.DependencyInjection;
 
 namespace Sand.Filter
 {
@@ -17,7 +17,7 @@ namespace Sand.Filter
         /// <summary>
         /// 用户上下文
         /// </summary>
-        [FromContainer]
+        [FromServiceContext]
         public IUserContext UserContext { get; set; }
         /// <summary>
         /// 日志

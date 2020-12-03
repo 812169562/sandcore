@@ -70,6 +70,10 @@ namespace Sand.Domain.Entities
         /// </summary>
         bool IsEnable { get; set; }
         /// <summary>
+        /// 是否可用
+        /// </summary>
+        int Status { get; set; }
+        /// <summary>
         /// 批量更新使用编号应该和主键相同
         /// </summary>
         [NotMapped]
@@ -183,6 +187,11 @@ namespace Sand.Domain.Entities
         /// </summary>
         [NotMapped]
         public virtual string StroeId { get; set; }
+
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public virtual int Status { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>
